@@ -13,6 +13,14 @@
 		536BB08529ECE4DB00364F27 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB08329ECE4DB00364F27 /* LoginViewController.xib */; };
 		536BB08929ECE4F500364F27 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB08729ECE4F500364F27 /* RegisterViewController.swift */; };
 		536BB08A29ECE4F500364F27 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB08829ECE4F500364F27 /* RegisterViewController.xib */; };
+		536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB08C29ECEC4D00364F27 /* PhotoViewerViewController.swift */; };
+		536BB08F29ECEC4D00364F27 /* PhotoViewerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB08D29ECEC4D00364F27 /* PhotoViewerViewController.xib */; };
+		536BB09329ECED1E00364F27 /* VieoPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB09129ECED1E00364F27 /* VieoPlayerViewController.swift */; };
+		536BB09429ECED1E00364F27 /* VieoPlayerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09229ECED1E00364F27 /* VieoPlayerViewController.xib */; };
+		536BB09829ECED6900364F27 /* NewConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB09629ECED6900364F27 /* NewConversationViewController.swift */; };
+		536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09729ECED6900364F27 /* NewConversationViewController.xib */; };
+		536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB09B29ECED8E00364F27 /* ProfileViewController.swift */; };
+		536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09C29ECED8E00364F27 /* ProfileViewController.xib */; };
 		53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14F929EC58D000DF1F4F /* AppDelegate.swift */; };
 		53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */; };
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
@@ -28,6 +36,14 @@
 		536BB08329ECE4DB00364F27 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		536BB08729ECE4F500364F27 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		536BB08829ECE4F500364F27 /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		536BB08C29ECEC4D00364F27 /* PhotoViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewerViewController.swift; sourceTree = "<group>"; };
+		536BB08D29ECEC4D00364F27 /* PhotoViewerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoViewerViewController.xib; sourceTree = "<group>"; };
+		536BB09129ECED1E00364F27 /* VieoPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VieoPlayerViewController.swift; sourceTree = "<group>"; };
+		536BB09229ECED1E00364F27 /* VieoPlayerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VieoPlayerViewController.xib; sourceTree = "<group>"; };
+		536BB09629ECED6900364F27 /* NewConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewController.swift; sourceTree = "<group>"; };
+		536BB09729ECED6900364F27 /* NewConversationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewConversationViewController.xib; sourceTree = "<group>"; };
+		536BB09B29ECED8E00364F27 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		536BB09C29ECED8E00364F27 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		53AD14F629EC58D000DF1F4F /* ChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AD14F929EC58D000DF1F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +87,10 @@
 		536BB07729ECE27900364F27 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				536BB09A29ECED8100364F27 /* Profile */,
+				536BB09529ECED5600364F27 /* NewConversation */,
+				536BB09029ECED0900364F27 /* VieoPlayer */,
+				536BB08B29ECEC3300364F27 /* PhotoViewer */,
 				536BB08029ECE4B900364F27 /* Authentications */,
 				536BB07A29ECE2F400364F27 /* Conversations */,
 			);
@@ -135,6 +155,42 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		536BB08B29ECEC3300364F27 /* PhotoViewer */ = {
+			isa = PBXGroup;
+			children = (
+				536BB08C29ECEC4D00364F27 /* PhotoViewerViewController.swift */,
+				536BB08D29ECEC4D00364F27 /* PhotoViewerViewController.xib */,
+			);
+			path = PhotoViewer;
+			sourceTree = "<group>";
+		};
+		536BB09029ECED0900364F27 /* VieoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				536BB09129ECED1E00364F27 /* VieoPlayerViewController.swift */,
+				536BB09229ECED1E00364F27 /* VieoPlayerViewController.xib */,
+			);
+			path = VieoPlayer;
+			sourceTree = "<group>";
+		};
+		536BB09529ECED5600364F27 /* NewConversation */ = {
+			isa = PBXGroup;
+			children = (
+				536BB09629ECED6900364F27 /* NewConversationViewController.swift */,
+				536BB09729ECED6900364F27 /* NewConversationViewController.xib */,
+			);
+			path = NewConversation;
+			sourceTree = "<group>";
+		};
+		536BB09A29ECED8100364F27 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				536BB09B29ECED8E00364F27 /* ProfileViewController.swift */,
+				536BB09C29ECED8E00364F27 /* ProfileViewController.xib */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		53AD14ED29EC58D000DF1F4F = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +236,6 @@
 				E15B8B72A86A9C8B1466B0A8 /* Pods-ChatDemo.debug.xcconfig */,
 				5307EE162512B14B44AC6BE7 /* Pods-ChatDemo.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -244,11 +299,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */,
 				536BB08529ECE4DB00364F27 /* LoginViewController.xib in Resources */,
+				536BB09429ECED1E00364F27 /* VieoPlayerViewController.xib in Resources */,
+				536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */,
 				536BB08A29ECE4F500364F27 /* RegisterViewController.xib in Resources */,
 				536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */,
 				53AD150629EC58D300DF1F4F /* LaunchScreen.storyboard in Resources */,
 				53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */,
+				536BB08F29ECEC4D00364F27 /* PhotoViewerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,9 +362,13 @@
 			files = (
 				536BB08429ECE4DB00364F27 /* LoginViewController.swift in Sources */,
 				536BB08929ECE4F500364F27 /* RegisterViewController.swift in Sources */,
+				536BB09829ECED6900364F27 /* NewConversationViewController.swift in Sources */,
 				536BB07D29ECE30800364F27 /* ConversationsViewController.swift in Sources */,
+				536BB09329ECED1E00364F27 /* VieoPlayerViewController.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
+				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
 				53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */,
+				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
