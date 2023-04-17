@@ -13,4 +13,19 @@ class ConversationsViewController: UIViewController {
         super.viewDidLoad()
 
     }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        checkAuthentication()
+    }
+
+    private func checkAuthentication() {
+        let isLoggedIn = UserDefaultManager<Bool>().getData(key: .isLoggedIn) ?? false
+        if !isLoggedIn {
+            let viewController = LoginViewController()
+            let navigation = UINavigationController(rootViewController: viewController)
+            navigation.modalPresentationStyle = .fullScreen
+            self.present(navigation, animated: true)
+        }
+    }
 }
