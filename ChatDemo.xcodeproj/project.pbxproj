@@ -21,6 +21,8 @@
 		536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09729ECED6900364F27 /* NewConversationViewController.xib */; };
 		536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB09B29ECED8E00364F27 /* ProfileViewController.swift */; };
 		536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09C29ECED8E00364F27 /* ProfileViewController.xib */; };
+		536BB0A229ECF46600364F27 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0A129ECF46600364F27 /* AppKey.swift */; };
+		536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0A429ED01E800364F27 /* UserDefaultManager.swift */; };
 		53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14F929EC58D000DF1F4F /* AppDelegate.swift */; };
 		53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */; };
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		536BB09729ECED6900364F27 /* NewConversationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewConversationViewController.xib; sourceTree = "<group>"; };
 		536BB09B29ECED8E00364F27 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		536BB09C29ECED8E00364F27 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		536BB0A129ECF46600364F27 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
+		536BB0A429ED01E800364F27 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		53AD14F629EC58D000DF1F4F /* ChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AD14F929EC58D000DF1F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +195,22 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		536BB0A029ECF45800364F27 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0A129ECF46600364F27 /* AppKey.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		536BB0A329ED01B800364F27 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0A429ED01E800364F27 /* UserDefaultManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		53AD14ED29EC58D000DF1F4F = {
 			isa = PBXGroup;
 			children = (
@@ -212,6 +232,8 @@
 		53AD14F829EC58D000DF1F4F /* ChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				536BB0A329ED01B800364F27 /* Managers */,
+				536BB0A029ECF45800364F27 /* General */,
 				536BB07F29ECE44000364F27 /* Models */,
 				536BB07829ECE28600364F27 /* ViewModels */,
 				536BB07729ECE27900364F27 /* ViewControllers */,
@@ -385,8 +407,10 @@
 				536BB09329ECED1E00364F27 /* VieoPlayerViewController.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
+				536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */,
 				53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
+				536BB0A229ECF46600364F27 /* AppKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
