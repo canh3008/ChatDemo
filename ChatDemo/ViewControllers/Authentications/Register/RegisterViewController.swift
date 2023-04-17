@@ -7,9 +7,14 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func setupUI() {
+        super.setupUI()
+        title = "Create Account"
     }
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DCTextField" customModule="ChatDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="containerTextFieldView" destination="67E-xP-3Gc" id="OtW-nr-YUi"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="c5V-yN-lpd"/>
+                <outlet property="errorLabel" destination="ORa-pt-FYg" id="CFe-zl-fDb"/>
+                <outlet property="heightTextFieldConstraint" destination="StT-gz-Iz3" id="lg3-wZ-FN7"/>
+                <outlet property="textField" destination="zdW-AL-qDB" id="OPX-mi-df0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="591" height="204"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="weU-DO-ve4">
+                    <rect key="frame" x="0.0" y="0.0" width="591" height="170"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67E-xP-3Gc" userLabel="Container Text Field">
+                            <rect key="frame" x="0.0" y="0.0" width="591" height="60"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zdW-AL-qDB" customClass="BaseTextField" customModule="ChatDemo" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="591" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="StT-gz-Iz3"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="leftSpacing">
+                                            <real key="value" value="10"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="zdW-AL-qDB" secondAttribute="trailing" id="7fo-Vd-827"/>
+                                <constraint firstItem="zdW-AL-qDB" firstAttribute="leading" secondItem="67E-xP-3Gc" secondAttribute="leading" id="8xt-Ze-KYC"/>
+                                <constraint firstItem="zdW-AL-qDB" firstAttribute="top" secondItem="67E-xP-3Gc" secondAttribute="top" id="Wo0-oO-QA7"/>
+                                <constraint firstAttribute="bottom" secondItem="zdW-AL-qDB" secondAttribute="bottom" id="gGz-lu-4AH"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ORa-pt-FYg">
+                            <rect key="frame" x="0.0" y="65" width="591" height="105"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="weU-DO-ve4" secondAttribute="trailing" id="4B6-U2-qZU"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="weU-DO-ve4" secondAttribute="bottom" id="B1p-HD-oBO"/>
+                <constraint firstItem="weU-DO-ve4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i4g-ro-l1l"/>
+                <constraint firstItem="weU-DO-ve4" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="uNc-zm-y4x"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="265.94202898550725" y="-139.95535714285714"/>
+        </view>
+    </objects>
+</document>

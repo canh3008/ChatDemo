@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31A29ED6DD100EE48F5 /* BaseView.swift */; };
+		5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */; };
 		536BB07D29ECE30800364F27 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB07B29ECE30800364F27 /* ConversationsViewController.swift */; };
 		536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB07C29ECE30800364F27 /* ConversationsViewController.xib */; };
 		536BB08429ECE4DB00364F27 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB08229ECE4DB00364F27 /* LoginViewController.swift */; };
@@ -23,6 +25,17 @@
 		536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB09C29ECED8E00364F27 /* ProfileViewController.xib */; };
 		536BB0A229ECF46600364F27 /* AppKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0A129ECF46600364F27 /* AppKey.swift */; };
 		536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0A429ED01E800364F27 /* UserDefaultManager.swift */; };
+		536BB0A929ED04E700364F27 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0A829ED04E700364F27 /* TabBarController.swift */; };
+		536BB0AB29ED069100364F27 /* CommonTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0AA29ED069100364F27 /* CommonTabBarViewController.swift */; };
+		536BB0AE29ED08AC00364F27 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0AD29ED08AC00364F27 /* NavigationController.swift */; };
+		536BB0B129ED09A800364F27 /* BarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0B029ED09A800364F27 /* BarButtonItem.swift */; };
+		536BB0B329ED266500364F27 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0B229ED266500364F27 /* BaseViewController.swift */; };
+		536BB0B729ED2F5100364F27 /* DCTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0B629ED2F5100364F27 /* DCTextField.swift */; };
+		536BB0B929ED301A00364F27 /* DCTextField.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB0B829ED301A00364F27 /* DCTextField.xib */; };
+		536BB0BB29ED43A900364F27 /* BaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BA29ED43A900364F27 /* BaseTextField.swift */; };
+		536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BC29ED487B00364F27 /* BaseButton.swift */; };
+		536BB0C029ED49B700364F27 /* DCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BF29ED49B700364F27 /* DCButton.swift */; };
+		536BB0C229ED4A3900364F27 /* DCButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB0C129ED4A3900364F27 /* DCButton.xib */; };
 		53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14F929EC58D000DF1F4F /* AppDelegate.swift */; };
 		53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */; };
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
@@ -32,6 +45,8 @@
 
 /* Begin PBXFileReference section */
 		5307EE162512B14B44AC6BE7 /* Pods-ChatDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatDemo.release.xcconfig"; path = "Target Support Files/Pods-ChatDemo/Pods-ChatDemo.release.xcconfig"; sourceTree = "<group>"; };
+		5366E31A29ED6DD100EE48F5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		536BB07B29ECE30800364F27 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		536BB07C29ECE30800364F27 /* ConversationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationsViewController.xib; sourceTree = "<group>"; };
 		536BB08229ECE4DB00364F27 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +63,17 @@
 		536BB09C29ECED8E00364F27 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		536BB0A129ECF46600364F27 /* AppKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppKey.swift; sourceTree = "<group>"; };
 		536BB0A429ED01E800364F27 /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		536BB0A829ED04E700364F27 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		536BB0AA29ED069100364F27 /* CommonTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonTabBarViewController.swift; sourceTree = "<group>"; };
+		536BB0AD29ED08AC00364F27 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		536BB0B029ED09A800364F27 /* BarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonItem.swift; sourceTree = "<group>"; };
+		536BB0B229ED266500364F27 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		536BB0B629ED2F5100364F27 /* DCTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCTextField.swift; sourceTree = "<group>"; };
+		536BB0B829ED301A00364F27 /* DCTextField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCTextField.xib; sourceTree = "<group>"; };
+		536BB0BA29ED43A900364F27 /* BaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTextField.swift; sourceTree = "<group>"; };
+		536BB0BC29ED487B00364F27 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		536BB0BF29ED49B700364F27 /* DCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCButton.swift; sourceTree = "<group>"; };
+		536BB0C129ED4A3900364F27 /* DCButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCButton.xib; sourceTree = "<group>"; };
 		53AD14F629EC58D000DF1F4F /* ChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AD14F929EC58D000DF1F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5366E31C29ED6E7700EE48F5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		536BB07529ECE26600364F27 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +116,8 @@
 		536BB07629ECE27000364F27 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				536BB0B429ED2E3100364F27 /* CustomViews */,
+				536BB0AF29ED096800364F27 /* BaseView */,
 				536BB07929ECE2D500364F27 /* Storyboards */,
 				53AD150229EC58D300DF1F4F /* Assets.xcassets */,
 			);
@@ -211,6 +247,72 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		536BB0A629ED04BA00364F27 /* TabBarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0A729ED04CC00364F27 /* TabBarController */,
+				536BB0AA29ED069100364F27 /* CommonTabBarViewController.swift */,
+				536BB0B029ED09A800364F27 /* BarButtonItem.swift */,
+			);
+			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		536BB0A729ED04CC00364F27 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0A829ED04E700364F27 /* TabBarController.swift */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		536BB0AC29ED088100364F27 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0AD29ED08AC00364F27 /* NavigationController.swift */,
+			);
+			path = NavigationController;
+			sourceTree = "<group>";
+		};
+		536BB0AF29ED096800364F27 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0A629ED04BA00364F27 /* TabBarControllers */,
+				536BB0AC29ED088100364F27 /* NavigationController */,
+				536BB0B229ED266500364F27 /* BaseViewController.swift */,
+				536BB0BA29ED43A900364F27 /* BaseTextField.swift */,
+				536BB0BC29ED487B00364F27 /* BaseButton.swift */,
+				5366E31A29ED6DD100EE48F5 /* BaseView.swift */,
+			);
+			name = BaseView;
+			sourceTree = "<group>";
+		};
+		536BB0B429ED2E3100364F27 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0BE29ED49A700364F27 /* DCButton */,
+				536BB0B529ED2F2000364F27 /* DCTextField */,
+			);
+			name = CustomViews;
+			sourceTree = "<group>";
+		};
+		536BB0B529ED2F2000364F27 /* DCTextField */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0B629ED2F5100364F27 /* DCTextField.swift */,
+				536BB0B829ED301A00364F27 /* DCTextField.xib */,
+			);
+			name = DCTextField;
+			sourceTree = "<group>";
+		};
+		536BB0BE29ED49A700364F27 /* DCButton */ = {
+			isa = PBXGroup;
+			children = (
+				536BB0BF29ED49B700364F27 /* DCButton.swift */,
+				536BB0C129ED4A3900364F27 /* DCButton.xib */,
+			);
+			name = DCButton;
+			sourceTree = "<group>";
+		};
 		53AD14ED29EC58D000DF1F4F = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +334,7 @@
 		53AD14F829EC58D000DF1F4F /* ChatDemo */ = {
 			isa = PBXGroup;
 			children = (
+				5366E31C29ED6E7700EE48F5 /* Extensions */,
 				536BB0A329ED01B800364F27 /* Managers */,
 				536BB0A029ECF45800364F27 /* General */,
 				536BB07F29ECE44000364F27 /* Models */,
@@ -322,6 +425,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536BB0C229ED4A3900364F27 /* DCButton.xib in Resources */,
+				536BB0B929ED301A00364F27 /* DCTextField.xib in Resources */,
 				536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */,
 				536BB08529ECE4DB00364F27 /* LoginViewController.xib in Resources */,
 				536BB09429ECED1E00364F27 /* VieoPlayerViewController.xib in Resources */,
@@ -400,15 +505,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */,
+				536BB0BB29ED43A900364F27 /* BaseTextField.swift in Sources */,
+				536BB0B729ED2F5100364F27 /* DCTextField.swift in Sources */,
 				536BB08429ECE4DB00364F27 /* LoginViewController.swift in Sources */,
 				536BB08929ECE4F500364F27 /* RegisterViewController.swift in Sources */,
 				536BB09829ECED6900364F27 /* NewConversationViewController.swift in Sources */,
+				536BB0B129ED09A800364F27 /* BarButtonItem.swift in Sources */,
 				536BB07D29ECE30800364F27 /* ConversationsViewController.swift in Sources */,
 				536BB09329ECED1E00364F27 /* VieoPlayerViewController.swift in Sources */,
+				536BB0C029ED49B700364F27 /* DCButton.swift in Sources */,
+				536BB0AE29ED08AC00364F27 /* NavigationController.swift in Sources */,
+				536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
 				536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */,
 				53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */,
+				536BB0AB29ED069100364F27 /* CommonTabBarViewController.swift in Sources */,
+				536BB0A929ED04E700364F27 /* TabBarController.swift in Sources */,
+				536BB0B329ED266500364F27 /* BaseViewController.swift in Sources */,
+				5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
 				536BB0A229ECF46600364F27 /* AppKey.swift in Sources */,
 			);
