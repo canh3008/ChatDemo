@@ -12,9 +12,18 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        bindingData()
     }
 
     func setupUI() {
 
+    }
+
+    func bindingData() {
+
+    }
+
+    deinit {
+        print(String(describing: Self.self), "deinit")
     }
 }

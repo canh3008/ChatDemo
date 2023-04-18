@@ -8,6 +8,8 @@ target 'ChatDemo' do
 	pod 'SwiftLint'
 	pod 'SwifterSwift'
 	pod 'MessageKit'
+  pod 'RxSwift'
+  pod 'RxCocoa'
   # Pods for ChatDemo
 
 end

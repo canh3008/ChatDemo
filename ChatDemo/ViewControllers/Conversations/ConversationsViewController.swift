@@ -22,7 +22,7 @@ class ConversationsViewController: UIViewController {
     private func checkAuthentication() {
         let isLoggedIn = UserDefaultManager<Bool>().getData(key: .isLoggedIn) ?? false
         if !isLoggedIn {
-            let viewController = LoginViewController()
+            let viewController = LoginViewController(viewModel: LoginViewModel())
             let navigation = NavigationController(rootViewController: viewController)
             navigation.modalPresentationStyle = .fullScreen
             self.present(navigation, animated: true)

@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class DCButton: BaseView {
     
-    @IBOutlet private weak var baseButton: UIButton!
+    @IBOutlet fileprivate weak var baseButton: UIButton!
 
     @IBInspectable var backgroundButton: UIColor = .white {
         didSet {
@@ -48,5 +50,17 @@ extension DCButton {
         baseButton.backgroundColor = backgroundButton
         baseButton.tintColor = textColor
         baseButton.setTitle(title, for: .normal)
+    }
+}
+
+extension Reactive where Base: DCButton {
+    var isEnable: Binder<Bool> {
+        return Binder(base) { dcButton, isEnable in
+            dcButton.baseButton.isEnabled = isEnable
+        }
+    }
+
+    var tap: Observable<Void> {
+        return base.baseButton.rx.tap.asObservable()
     }
 }

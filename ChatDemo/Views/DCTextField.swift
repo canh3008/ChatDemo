@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import RxSwift
 
 class DCTextField: BaseView {
 
     @IBOutlet private weak var containerTextFieldView: UIView!
     @IBOutlet private weak var errorLabel: UILabel!
     @IBOutlet private weak var heightTextFieldConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var textField: BaseTextField!
+    @IBOutlet fileprivate weak var textField: BaseTextField!
 
     @IBInspectable var heightView: CGFloat = DefaultValue.heightTextFiled {
         didSet {
@@ -69,5 +70,11 @@ extension DCTextField {
 
     struct DefaultValue {
         static var heightTextFiled: CGFloat = 60
+    }
+}
+
+extension Reactive where Base: DCTextField {
+    var text: Observable<String> {
+        return base.textField.rx.text.compactMap({ $0 })
     }
 }

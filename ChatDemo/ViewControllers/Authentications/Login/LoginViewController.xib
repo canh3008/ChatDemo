@@ -10,6 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="ChatDemo" customModuleProvider="target">
             <connections>
+                <outlet property="emailView" destination="3Md-6N-0OX" id="k0V-LS-7uc"/>
+                <outlet property="logInButton" destination="VCZ-QL-TAA" id="Xvp-ob-4Oy"/>
+                <outlet property="passwordView" destination="Fba-t4-38K" id="p0x-fT-7a3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
