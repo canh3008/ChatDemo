@@ -11,7 +11,7 @@ import RxSwift
 class DCTextField: BaseView {
 
     @IBOutlet private weak var containerTextFieldView: UIView!
-    @IBOutlet private weak var errorLabel: UILabel!
+    @IBOutlet fileprivate weak var errorLabel: UILabel!
     @IBOutlet private weak var heightTextFieldConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var textField: BaseTextField!
 
@@ -69,7 +69,7 @@ extension DCTextField {
     }
 
     struct DefaultValue {
-        static var heightTextFiled: CGFloat = 60
+        static var heightTextFiled: CGFloat = 50
     }
 }
 
@@ -77,4 +77,20 @@ extension Reactive where Base: DCTextField {
     var text: Observable<String> {
         return base.textField.rx.text.compactMap({ $0 })
     }
+
+    var messageError: Binder<String> {
+        return Binder(base) { dcTextField, messageError in
+            dcTextField.errorLabel.text = messageError
+        }
+    }
+
+    var isError: Binder<Bool> {
+        return Binder(base) { dcTextField, isError in
+            dcTextField.errorLabel.isHidden = !isError
+            if isError {
+                dcTextField.errorLabel.textColor = Theme.error.color
+            }
+        }
+    }
+
 }

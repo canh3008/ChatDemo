@@ -56,7 +56,10 @@ extension DCButton {
 extension Reactive where Base: DCButton {
     var isEnable: Binder<Bool> {
         return Binder(base) { dcButton, isEnable in
-            dcButton.baseButton.isEnabled = isEnable
+            dcButton.baseButton.isUserInteractionEnabled = isEnable
+            dcButton.baseButton.backgroundColor = isEnable
+            ? dcButton.backgroundButton
+            : Theme.disable.color
         }
     }
 

@@ -42,6 +42,35 @@ class LoginViewController: BaseViewController {
                                          tapLogin: logInButton.rx.tap)
         let output = viewModel.transform(input: input)
 
+        output
+            .emailError
+            .drive(emailView.rx.messageError)
+            .disposed(by: disposeBag)
+
+        output
+            .isEmailSuccess
+            .skip(1)
+            .map({ !$0 })
+            .drive(emailView.rx.isError)
+            .disposed(by: disposeBag)
+
+        output
+            .passwordError
+            .drive(passwordView.rx.messageError)
+            .disposed(by: disposeBag)
+
+        output
+            .isPasswordError
+            .skip(1)
+            .map({ !$0 })
+            .drive(passwordView.rx.isError)
+            .disposed(by: disposeBag)
+
+        output
+            .isEnableLogin
+            .drive(logInButton.rx.isEnable)
+            .disposed(by: disposeBag)
+
     }
 
     private func addRegisterButton() {

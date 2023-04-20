@@ -39,8 +39,8 @@ class Validator: ValidateFeature {
             switch type {
             case .email(let email):
                 observer.onNext(self?.getEmailValidationResult(email) ?? .failed(MessageErrorDefault.notDefined.rawValue))
-            case .password:
-                observer.onNext(.success)
+            case .password(let password):
+                observer.onNext(self?.getPasswordValidationResult(password) ?? .failed(MessageErrorDefault.notDefined.rawValue))
             }
             return Disposables.create()
         }
@@ -51,5 +51,13 @@ class Validator: ValidateFeature {
             return .failed(MessageErrorDefault.emailEmpty.rawValue)
         }
         return email.isValidEmail ? .success : .failed(MessageErrorDefault.email.rawValue)
+    }
+
+    func getPasswordValidationResult(_ password: String) ->  ValidationResult<ResultValue> {
+        guard !password.isEmpty else {
+            return .failed(MessageErrorDefault.passwordEmpty.rawValue)
+        }
+        return password.isValidatePassword() ? .success : .failed(MessageErrorDefault.email.rawValue)
+
     }
 }

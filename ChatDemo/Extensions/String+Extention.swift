@@ -15,4 +15,11 @@ extension String {
         let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: self)
     }
+
+    func isValidatePassword() -> Bool {
+        let passwordRegEx = "[A-Z0-9a-z]{8,64}"
+
+        let passwordPred = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
+        return passwordPred.evaluate(with: self)
+    }
 }
