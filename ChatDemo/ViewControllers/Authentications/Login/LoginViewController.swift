@@ -73,6 +73,15 @@ class LoginViewController: BaseViewController {
 
     }
 
+    override func bindingAction() {
+        super.bindingAction()
+        emailView
+            .textFieldShouldReturnSubject
+            .mapToVoid()
+            .bind(to: passwordView.rx.becomeFirstResponse)
+            .disposed(by: disposeBag)
+    }
+
     private func addRegisterButton() {
         navigationItem.rightBarButtonItem = BarButtonItem(title: "Register",
                                                           style: .done,

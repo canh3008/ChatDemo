@@ -8,7 +8,33 @@
 import UIKit
 import RxSwift
 
-class BaseViewController: UIViewController {
+protocol FeatureCommonBase {
+    func setupUI()
+}
+
+protocol BindingBase {
+    func bindingData()
+    func bindingAction()
+}
+
+class SpecialBaseViewController: UIViewController, FeatureCommonBase {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+
+    func setupUI() {
+
+    }
+
+    deinit {
+        print(String(describing: Self.self), "deinit")
+    }
+
+}
+
+class BaseViewController: UIViewController, FeatureCommonBase, BindingBase {
 
     var disposeBag = DisposeBag()
 
@@ -16,6 +42,7 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         bindingData()
+        bindingAction()
     }
 
     func setupUI() {
@@ -23,6 +50,10 @@ class BaseViewController: UIViewController {
     }
 
     func bindingData() {
+
+    }
+
+    func bindingAction() {
 
     }
 

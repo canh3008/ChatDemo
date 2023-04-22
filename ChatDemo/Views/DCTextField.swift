@@ -51,11 +51,15 @@ class DCTextField: BaseView {
         }
     }
 
+    // Public Properties
+    var textFieldShouldReturnSubject = PublishSubject<UIView>()
+
     override func initView() {
         Bundle.main.loadNibNamed(className, owner: self)
         self.addSubview(contentView)
         super.initView()
         setupUI()
+        addDelegate()
     }
 }
 
@@ -68,8 +72,19 @@ extension DCTextField {
         containerTextFieldView.layer.cornerRadius = cornerRadiusTextField
     }
 
+    private func addDelegate() {
+        textField.delegate = self
+    }
+
     struct DefaultValue {
         static var heightTextFiled: CGFloat = 50
+    }
+}
+
+extension DCTextField: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textFieldShouldReturnSubject.onNext(self)
+        return true
     }
 }
 
@@ -90,6 +105,12 @@ extension Reactive where Base: DCTextField {
             if isError {
                 dcTextField.errorLabel.textColor = Theme.error.color
             }
+        }
+    }
+
+    var becomeFirstResponse: Binder<Void> {
+        return Binder(base) { dcTextField, _ in
+            dcTextField.textField.becomeFirstResponder()
         }
     }
 
