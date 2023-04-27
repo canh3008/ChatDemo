@@ -15,6 +15,7 @@
                 <outlet property="contentView" destination="iN0-l3-epB" id="c5V-yN-lpd"/>
                 <outlet property="errorLabel" destination="ORa-pt-FYg" id="CFe-zl-fDb"/>
                 <outlet property="heightTextFieldConstraint" destination="StT-gz-Iz3" id="lg3-wZ-FN7"/>
+                <outlet property="showButton" destination="J4p-2l-VGm" id="bgd-sf-g4m"/>
                 <outlet property="textField" destination="zdW-AL-qDB" id="OPX-mi-df0"/>
             </connections>
         </placeholder>
@@ -42,12 +43,23 @@
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </textField>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J4p-2l-VGm">
+                                    <rect key="frame" x="546" y="17.5" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="25" id="IVe-ea-eWC"/>
+                                        <constraint firstAttribute="width" secondItem="J4p-2l-VGm" secondAttribute="height" id="awd-0i-SQE"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" title="Button" image="hide_password_ic"/>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="J4p-2l-VGm" secondAttribute="trailing" constant="20" symbolic="YES" id="59b-BS-piA"/>
                                 <constraint firstAttribute="trailing" secondItem="zdW-AL-qDB" secondAttribute="trailing" id="7fo-Vd-827"/>
                                 <constraint firstItem="zdW-AL-qDB" firstAttribute="leading" secondItem="67E-xP-3Gc" secondAttribute="leading" id="8xt-Ze-KYC"/>
                                 <constraint firstItem="zdW-AL-qDB" firstAttribute="top" secondItem="67E-xP-3Gc" secondAttribute="top" id="Wo0-oO-QA7"/>
+                                <constraint firstItem="J4p-2l-VGm" firstAttribute="centerY" secondItem="zdW-AL-qDB" secondAttribute="centerY" id="cht-4o-KCN"/>
                                 <constraint firstAttribute="bottom" secondItem="zdW-AL-qDB" secondAttribute="bottom" id="gGz-lu-4AH"/>
                             </constraints>
                         </view>
@@ -74,6 +86,7 @@
         </view>
     </objects>
     <resources>
+        <image name="hide_password_ic" width="512" height="512"/>
         <namedColor name="Error">
             <color red="1" green="0.29411764705882354" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>

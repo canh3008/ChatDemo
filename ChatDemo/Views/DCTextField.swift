@@ -14,6 +14,7 @@ class DCTextField: BaseView {
     @IBOutlet fileprivate weak var errorLabel: UILabel!
     @IBOutlet private weak var heightTextFieldConstraint: NSLayoutConstraint!
     @IBOutlet fileprivate weak var textField: BaseTextField!
+    @IBOutlet fileprivate weak var showButton: UIButton!
 
     @IBInspectable var heightView: CGFloat = DefaultValue.heightTextFiled {
         didSet {
@@ -51,6 +52,12 @@ class DCTextField: BaseView {
         }
     }
 
+    @IBInspectable var isShowEyeButton: Bool = false {
+        didSet {
+            showButton.isHidden = !isShowEyeButton
+        }
+    }
+
     // Public Properties
     var textFieldShouldReturnSubject = PublishSubject<UIView>()
 
@@ -66,6 +73,8 @@ class DCTextField: BaseView {
 extension DCTextField {
     private func setupUI() {
         errorLabel.isHidden = !isError
+        showButton.isHidden = !isShowEyeButton
+        updateUI(isShow: false)
 
         containerTextFieldView.layer.borderWidth = borderWidthTextField
         containerTextFieldView.layer.borderColor = borderColerTextField.cgColor
@@ -74,6 +83,21 @@ extension DCTextField {
 
     private func addDelegate() {
         textField.delegate = self
+    }
+
+    private func setImageForShowButton(isShow: Bool) {
+        let nameImage = isShow ? "hide_password_ic" : "show_password_ic"
+        showButton.setImage(UIImage(named: nameImage),
+                                        for: .normal)
+    }
+
+    private func setSecureTextForTextField(isSecureText: Bool) {
+        textField.isSecureTextEntry = isSecureText
+    }
+
+    fileprivate func updateUI(isShow: Bool) {
+        setImageForShowButton(isShow: isShow)
+        setSecureTextForTextField(isSecureText: !isShow)
     }
 
     struct DefaultValue {
@@ -111,6 +135,16 @@ extension Reactive where Base: DCTextField {
     var becomeFirstResponse: Binder<Void> {
         return Binder(base) { dcTextField, _ in
             dcTextField.textField.becomeFirstResponder()
+        }
+    }
+
+    var tapShowInfo: Observable<Void> {
+        return base.showButton.rx.tap.asObservable()
+    }
+
+    var isShowInfo: Binder<Bool> {
+        return Binder(base) { dcTextField, isShow in
+            dcTextField.updateUI(isShow: isShow)
         }
     }
 

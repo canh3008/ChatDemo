@@ -37,7 +37,8 @@ class RegisterViewController: BaseViewController {
                                             lastName: lastNameView.rx.text,
                                             email: emailView.rx.text,
                                             password: passwordView.rx.text,
-                                            tapRegister: registerButton.rx.tap)
+                                            tapRegister: registerButton.rx.tap,
+                                            tapShowPassword: passwordView.rx.tapShowInfo)
         let output = viewModel.transform(input: input)
 
         output
@@ -91,6 +92,11 @@ class RegisterViewController: BaseViewController {
         output
             .isEnableRegister
             .drive(registerButton.rx.isEnable)
+            .disposed(by: disposeBag)
+
+        output
+            .isShowPassword
+            .drive(passwordView.rx.isShowInfo)
             .disposed(by: disposeBag)
 
     }

@@ -39,7 +39,8 @@ class LoginViewController: BaseViewController {
         super.bindingData()
         let input = LoginViewModel.Input(email: emailView.rx.text,
                                          password: passwordView.rx.text,
-                                         tapLogin: logInButton.rx.tap)
+                                         tapLogin: logInButton.rx.tap,
+                                         tapShowPassword: passwordView.rx.tapShowInfo)
         let output = viewModel.transform(input: input)
 
         output
@@ -69,6 +70,11 @@ class LoginViewController: BaseViewController {
         output
             .isEnableLogin
             .drive(logInButton.rx.isEnable)
+            .disposed(by: disposeBag)
+
+        output
+            .isShowPassword
+            .drive(passwordView.rx.isShowInfo)
             .disposed(by: disposeBag)
 
     }

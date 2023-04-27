@@ -12,6 +12,8 @@ import RxCocoa
 class RegisterViewModel: BaseViewModel, ViewModelTransformable {
     private let validator: Validator
 
+    private var isShowPasswordSubject = BehaviorRelay<Bool>(value: true)
+    
     init(validator: Validator = Validator()) {
         self.validator = validator
     }
@@ -87,6 +89,15 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
                                                          isValidateFirstNameSuccess,
                                                          isValidateLastNameSuccess)
             .map({ $0 && $1 && $2 && $3})
+
+        let isShowPassword = input
+            .tapShowPassword
+            .withLatestFrom(isShowPasswordSubject)
+            .do(onNext: { [weak self] _ in
+                let currentValue = self?.isShowPasswordSubject.value
+                self?.isShowPasswordSubject.accept(!(currentValue ?? false))
+            }).asDriverOnErrorJustComplete()
+                
         return Output(emailError: validateEmailError,
                       isEmailSuccess: isValidateEmailSuccess,
                       passwordError: validatePasswordError,
@@ -95,7 +106,8 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
                       isFirstNameSuccess: isValidateFirstNameSuccess,
                       lastNameError: validateLastNameError,
                       isLastNameSuccess: isValidateLastNameSuccess,
-                      isEnableRegister: commonValidateSuccess)
+                      isEnableRegister: commonValidateSuccess,
+                      isShowPassword: isShowPassword)
     }
 }
 
@@ -106,6 +118,7 @@ extension RegisterViewModel {
         let email: Observable<String>
         let password: Observable<String>
         let tapRegister: Observable<Void>
+        let tapShowPassword: Observable<Void>
     }
 
     struct Output {
@@ -118,5 +131,6 @@ extension RegisterViewModel {
         let lastNameError: Driver<String>
         let isLastNameSuccess: Driver<Bool>
         let isEnableRegister: Driver<Bool>
+        let isShowPassword: Driver<Bool>
     }
 }

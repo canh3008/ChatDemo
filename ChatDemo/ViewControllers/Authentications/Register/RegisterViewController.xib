@@ -89,6 +89,7 @@
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusTextField">
                                                             <real key="value" value="10"/>
                                                         </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isShowEyeButton" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                             </subviews>

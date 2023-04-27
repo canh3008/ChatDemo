@@ -13,6 +13,8 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
 
     private let validator: Validator
 
+    private var isShowPasswordSubject = BehaviorRelay<Bool>(value: true)
+
     init(validator: Validator = Validator()) {
         self.validator = validator
     }
@@ -54,11 +56,20 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
         let commonValidateSuccess = Driver.combineLatest(isValidatePasswordSuccess, isValidateEmailSuccess)
             .map({ $0 && $1 })
 
+        let isShowPassword = input
+            .tapShowPassword
+            .withLatestFrom(isShowPasswordSubject)
+            .do(onNext: { [weak self] _ in
+                let currentValue = self?.isShowPasswordSubject.value
+                self?.isShowPasswordSubject.accept(!(currentValue ?? false))
+            }).asDriverOnErrorJustComplete()
+
         return Output(emailError: validateEmailError,
                       isEmailSuccess: isValidateEmailSuccess,
                       passwordError: validatePasswordError,
                       isPasswordSuccess: isValidatePasswordSuccess,
-                      isEnableLogin: commonValidateSuccess)
+                      isEnableLogin: commonValidateSuccess,
+                      isShowPassword: isShowPassword)
     }
 }
 
@@ -67,6 +78,7 @@ extension LoginViewModel {
         let email: Observable<String>
         let password: Observable<String>
         let tapLogin: Observable<Void>
+        let tapShowPassword: Observable<Void>
     }
 
     struct Output {
@@ -75,5 +87,6 @@ extension LoginViewModel {
         let passwordError: Driver<String>
         let isPasswordSuccess: Driver<Bool>
         let isEnableLogin: Driver<Bool>
+        let isShowPassword: Driver<Bool>
     }
 }
