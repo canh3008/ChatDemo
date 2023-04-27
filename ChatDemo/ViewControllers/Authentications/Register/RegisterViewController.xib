@@ -33,7 +33,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zj2-Im-0eF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="814"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_icon" translatesAutoresizingMaskIntoConstraints="NO" id="CCU-GH-4Xn">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_ic" translatesAutoresizingMaskIntoConstraints="NO" id="CCU-GH-4Xn">
                                             <rect key="frame" x="138" y="30" width="138" height="138"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="CCU-GH-4Xn" secondAttribute="height" id="2hR-Xg-jEU"/>
@@ -159,7 +159,7 @@
         </view>
     </objects>
     <resources>
-        <image name="message_icon" width="512" height="512"/>
+        <image name="person_ic" width="512" height="512"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
