@@ -57,7 +57,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
         return Output(emailError: validateEmailError,
                       isEmailSuccess: isValidateEmailSuccess,
                       passwordError: validatePasswordError,
-                      isPasswordError: isValidatePasswordSuccess,
+                      isPasswordSuccess: isValidatePasswordSuccess,
                       isEnableLogin: commonValidateSuccess)
     }
 }
@@ -73,7 +73,7 @@ extension LoginViewModel {
         let emailError: Driver<String>
         let isEmailSuccess: Driver<Bool>
         let passwordError: Driver<String>
-        let isPasswordError: Driver<Bool>
+        let isPasswordSuccess: Driver<Bool>
         let isEnableLogin: Driver<Bool>
     }
 }

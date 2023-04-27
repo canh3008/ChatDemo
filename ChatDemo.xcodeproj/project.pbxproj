@@ -46,6 +46,7 @@
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
 		53AD150629EC58D300DF1F4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150429EC58D300DF1F4F /* LaunchScreen.storyboard */; };
 		53C5D85429F1767200A6B063 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53C5D85329F1767200A6B063 /* Theme.swift */; };
+		53D2C3B829F4405700DEFFBA /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D2C3B729F4405700DEFFBA /* RegisterViewModel.swift */; };
 		B7E45F63CD00C2AB9E122A1C /* Pods_ChatDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BEEFEADF421C0B04386A769 /* Pods_ChatDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -92,6 +93,7 @@
 		53AD150529EC58D300DF1F4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		53AD150729EC58D300DF1F4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		53C5D85329F1767200A6B063 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		53D2C3B729F4405700DEFFBA /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		8BEEFEADF421C0B04386A769 /* Pods_ChatDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15B8B72A86A9C8B1466B0A8 /* Pods-ChatDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatDemo.debug.xcconfig"; path = "Target Support Files/Pods-ChatDemo/Pods-ChatDemo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +201,7 @@
 			children = (
 				536BB08729ECE4F500364F27 /* RegisterViewController.swift */,
 				536BB08829ECE4F500364F27 /* RegisterViewController.xib */,
+				53D2C3B729F4405700DEFFBA /* RegisterViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				536BB0B329ED266500364F27 /* BaseViewController.swift in Sources */,
 				5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */,
 				5366E32429EE38FE00EE48F5 /* Validator.swift in Sources */,
+				53D2C3B829F4405700DEFFBA /* RegisterViewModel.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
 				536BB0A229ECF46600364F27 /* AppKey.swift in Sources */,
 			);

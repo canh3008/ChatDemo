@@ -90,7 +90,7 @@ extension DCTextField: UITextFieldDelegate {
 
 extension Reactive where Base: DCTextField {
     var text: Observable<String> {
-        return base.textField.rx.text.compactMap({ $0 })
+        return base.textField.rx.value.compactMap({ $0 })
     }
 
     var messageError: Binder<String> {

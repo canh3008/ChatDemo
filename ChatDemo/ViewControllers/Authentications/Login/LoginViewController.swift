@@ -60,7 +60,7 @@ class LoginViewController: BaseViewController {
             .disposed(by: disposeBag)
 
         output
-            .isPasswordError
+            .isPasswordSuccess
             .skip(1)
             .map({ !$0 })
             .drive(passwordView.rx.isError)
@@ -92,7 +92,7 @@ class LoginViewController: BaseViewController {
 
 extension LoginViewController {
     @objc func didTapRegister() {
-        let registerViewController = RegisterViewController()
+        let registerViewController = RegisterViewController(viewModel: RegisterViewModel())
         self.navigationController?.pushViewController(registerViewController, animated: true)
     }
 }

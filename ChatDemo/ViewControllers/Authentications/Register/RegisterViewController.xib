@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,21 +11,159 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="ChatDemo" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="emailView" destination="UAY-pt-Qa1" id="l8n-Rt-ydu"/>
+                <outlet property="firstNameView" destination="k4L-Zv-zEa" id="k4H-bn-2kJ"/>
+                <outlet property="lastNameView" destination="rL6-RJ-lps" id="qDi-8t-Vzo"/>
+                <outlet property="passwordView" destination="z5n-f5-bF3" id="EOk-ny-fXf"/>
+                <outlet property="registerButton" destination="XOL-La-FOb" id="6hT-zv-w4W"/>
+                <outlet property="view" destination="fA5-JR-S21" id="Lv3-iH-eRq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="fA5-JR-S21">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemOrangeColor"/>
-            <point key="canvasLocation" x="139" y="92"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tH7-aQ-cKD">
+                    <rect key="frame" x="0.0" y="48" width="414" height="814"/>
+                    <subviews>
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rKa-fG-EoL">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="814"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zj2-Im-0eF">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="814"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="message_icon" translatesAutoresizingMaskIntoConstraints="NO" id="CCU-GH-4Xn">
+                                            <rect key="frame" x="138" y="30" width="138" height="138"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="CCU-GH-4Xn" secondAttribute="height" id="2hR-Xg-jEU"/>
+                                            </constraints>
+                                        </imageView>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="B20-Wf-V1s">
+                                            <rect key="frame" x="30" y="228" width="354" height="542"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="354" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="k4L-Zv-zEa" userLabel="First Name Text Field" customClass="DCTextField" customModule="ChatDemo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="354" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="First Name ..."/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidthTextField">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusTextField">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="354" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="rL6-RJ-lps" userLabel="Last Name Text Field" customClass="DCTextField" customModule="ChatDemo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="138" width="354" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Last Name ..."/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidthTextField">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusTextField">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="354" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="UAY-pt-Qa1" userLabel="Email Text Field" customClass="DCTextField" customModule="ChatDemo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="276" width="354" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Email Address..."/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidthTextField">
+                                                            <real key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusTextField">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="354" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="z5n-f5-bF3" userLabel="Password Text Field" customClass="DCTextField" customModule="ChatDemo" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="414" width="354" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeHolderText" value="Password..."/>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusTextField">
+                                                            <real key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOL-La-FOb" userLabel="Register Button" customClass="DCButton" customModule="ChatDemo" customModuleProvider="target">
+                                            <rect key="frame" x="30" y="780" width="354" height="60"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="60" id="VQn-ey-uSp"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="backgroundButton">
+                                                    <color key="value" systemColor="systemGreenColor"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Log In"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusButton">
+                                                    <real key="value" value="10"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="CCU-GH-4Xn" firstAttribute="centerX" secondItem="Zj2-Im-0eF" secondAttribute="centerX" id="1qS-YQ-9ZC"/>
+                                        <constraint firstAttribute="trailing" secondItem="B20-Wf-V1s" secondAttribute="trailing" constant="30" id="6oO-5S-9qD"/>
+                                        <constraint firstItem="CCU-GH-4Xn" firstAttribute="top" secondItem="Zj2-Im-0eF" secondAttribute="top" constant="30" id="94z-iq-03M"/>
+                                        <constraint firstItem="B20-Wf-V1s" firstAttribute="leading" secondItem="Zj2-Im-0eF" secondAttribute="leading" constant="30" id="Mj4-mh-341"/>
+                                        <constraint firstItem="CCU-GH-4Xn" firstAttribute="width" secondItem="Zj2-Im-0eF" secondAttribute="width" multiplier="1 / 3" id="U76-I6-Puu"/>
+                                        <constraint firstItem="B20-Wf-V1s" firstAttribute="top" secondItem="CCU-GH-4Xn" secondAttribute="bottom" constant="60" id="fEi-dL-296"/>
+                                        <constraint firstItem="XOL-La-FOb" firstAttribute="top" secondItem="B20-Wf-V1s" secondAttribute="bottom" constant="10" id="gKQ-l1-NSS"/>
+                                        <constraint firstItem="XOL-La-FOb" firstAttribute="leading" secondItem="Zj2-Im-0eF" secondAttribute="leading" constant="30" id="rcI-vw-Qhc"/>
+                                        <constraint firstAttribute="trailing" secondItem="XOL-La-FOb" secondAttribute="trailing" constant="30" id="vZc-Bo-kyU"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="Zj2-Im-0eF" secondAttribute="bottom" id="6Kq-HA-t5z"/>
+                                <constraint firstItem="Zj2-Im-0eF" firstAttribute="width" secondItem="rKa-fG-EoL" secondAttribute="width" id="LYD-R2-cRe"/>
+                                <constraint firstItem="Zj2-Im-0eF" firstAttribute="height" secondItem="rKa-fG-EoL" secondAttribute="height" priority="250" id="N5D-4U-62h"/>
+                                <constraint firstAttribute="trailing" secondItem="Zj2-Im-0eF" secondAttribute="trailing" id="ZwQ-dM-Ydq"/>
+                                <constraint firstItem="Zj2-Im-0eF" firstAttribute="top" secondItem="rKa-fG-EoL" secondAttribute="top" id="jh5-Tw-ldw"/>
+                                <constraint firstItem="Zj2-Im-0eF" firstAttribute="leading" secondItem="rKa-fG-EoL" secondAttribute="leading" id="nvd-82-Pru"/>
+                            </constraints>
+                        </scrollView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="rKa-fG-EoL" secondAttribute="bottom" id="Ayf-EG-n6a"/>
+                        <constraint firstItem="rKa-fG-EoL" firstAttribute="top" secondItem="tH7-aQ-cKD" secondAttribute="top" id="EPy-Ue-qOF"/>
+                        <constraint firstItem="rKa-fG-EoL" firstAttribute="leading" secondItem="tH7-aQ-cKD" secondAttribute="leading" id="X03-7E-kW8"/>
+                        <constraint firstAttribute="trailing" secondItem="rKa-fG-EoL" secondAttribute="trailing" id="wqB-aK-v9M"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Lg0-ne-DdB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Lg0-ne-DdB" firstAttribute="bottom" secondItem="tH7-aQ-cKD" secondAttribute="bottom" id="3t0-jT-2m1"/>
+                <constraint firstItem="Lg0-ne-DdB" firstAttribute="trailing" secondItem="tH7-aQ-cKD" secondAttribute="trailing" id="MMh-Ez-5DV"/>
+                <constraint firstItem="tH7-aQ-cKD" firstAttribute="top" secondItem="Lg0-ne-DdB" secondAttribute="top" id="kQx-5g-KID"/>
+                <constraint firstItem="tH7-aQ-cKD" firstAttribute="leading" secondItem="Lg0-ne-DdB" secondAttribute="leading" id="rsg-pM-97V"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="91.741071428571431"/>
         </view>
     </objects>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <image name="message_icon" width="512" height="512"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

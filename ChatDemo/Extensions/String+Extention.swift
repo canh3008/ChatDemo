@@ -22,4 +22,11 @@ extension String {
         let passwordPred = NSPredicate(format: "SELF MATCHES %@", passwordRegEx)
         return passwordPred.evaluate(with: self)
     }
+
+    func isValidateName() -> Bool {
+        let nameRegEx = "[A-Z0-9a-z]{1,10}"
+
+        let namePred = NSPredicate(format: "SELF MATCHES %@", nameRegEx)
+        return namePred.evaluate(with: self)
+    }
 }

@@ -22,14 +22,19 @@ protocol ValidateFeature {
 enum ValidationType<Value> {
     case email(Value)
     case password(Value)
+    case name(Value)
 }
 
 enum MessageErrorDefault: String {
     case notDefined = "Not defined object"
-    case email = "Email Error"
+    case email = "Email error"
     case emailEmpty = "Please enter the email"
-    case password = "Password Error"
+    case password = "Password error"
     case passwordEmpty = "Please enter the password"
+    case firstName = "First name error"
+    case firstNameEmpty = "Please enter the first name"
+    case lastName = "Last name error"
+    case lastNameEmpty = "Please enter the last name"
 }
 
 class Validator: ValidateFeature {
@@ -41,23 +46,32 @@ class Validator: ValidateFeature {
                 observer.onNext(self?.getEmailValidationResult(email) ?? .failed(MessageErrorDefault.notDefined.rawValue))
             case .password(let password):
                 observer.onNext(self?.getPasswordValidationResult(password) ?? .failed(MessageErrorDefault.notDefined.rawValue))
+            case .name(let name):
+                observer.onNext(self?.getNameValidationResult(name) ?? .failed(MessageErrorDefault.notDefined.rawValue))
             }
             return Disposables.create()
         }
     }
 
-    func getEmailValidationResult(_ email: String) -> ValidationResult<ResultValue> {
+    private func getEmailValidationResult(_ email: String) -> ValidationResult<ResultValue> {
         guard !email.isEmpty else {
             return .failed(MessageErrorDefault.emailEmpty.rawValue)
         }
         return email.isValidEmail ? .success : .failed(MessageErrorDefault.email.rawValue)
     }
 
-    func getPasswordValidationResult(_ password: String) ->  ValidationResult<ResultValue> {
+    private func getPasswordValidationResult(_ password: String) -> ValidationResult<ResultValue> {
         guard !password.isEmpty else {
             return .failed(MessageErrorDefault.passwordEmpty.rawValue)
         }
         return password.isValidatePassword() ? .success : .failed(MessageErrorDefault.email.rawValue)
 
+    }
+
+    private func getNameValidationResult(_ name: String) -> ValidationResult<ResultValue> {
+        guard !name.isEmpty else {
+            return .failed(MessageErrorDefault.firstNameEmpty.rawValue)
+        }
+        return name.isValidateName() ? .success : .failed(MessageErrorDefault.firstName.rawValue)
     }
 }

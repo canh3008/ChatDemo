@@ -75,7 +75,7 @@
     </objects>
     <resources>
         <namedColor name="Error">
-            <color red="1" green="0.29720581529933088" blue="0.12100343932735269" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color red="1" green="0.29411764705882354" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
         </namedColor>
     </resources>
 </document>
