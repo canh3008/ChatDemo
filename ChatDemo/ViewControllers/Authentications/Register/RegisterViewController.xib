@@ -11,10 +11,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="ChatDemo" customModuleProvider="target">
             <connections>
+                <outlet property="changePictureButton" destination="wDs-aS-TRr" id="v32-98-7IE"/>
                 <outlet property="emailView" destination="UAY-pt-Qa1" id="l8n-Rt-ydu"/>
                 <outlet property="firstNameView" destination="k4L-Zv-zEa" id="k4H-bn-2kJ"/>
                 <outlet property="lastNameView" destination="rL6-RJ-lps" id="qDi-8t-Vzo"/>
                 <outlet property="passwordView" destination="z5n-f5-bF3" id="EOk-ny-fXf"/>
+                <outlet property="personImageView" destination="CCU-GH-4Xn" id="wFp-Jq-xDX"/>
                 <outlet property="registerButton" destination="XOL-La-FOb" id="6hT-zv-w4W"/>
                 <outlet property="view" destination="fA5-JR-S21" id="Lv3-iH-eRq"/>
             </connections>
@@ -33,7 +35,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zj2-Im-0eF">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="814"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_ic" translatesAutoresizingMaskIntoConstraints="NO" id="CCU-GH-4Xn">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person_ic" translatesAutoresizingMaskIntoConstraints="NO" id="CCU-GH-4Xn">
                                             <rect key="frame" x="138" y="30" width="138" height="138"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="CCU-GH-4Xn" secondAttribute="height" id="2hR-Xg-jEU"/>
@@ -113,16 +115,24 @@
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
                                         </view>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDs-aS-TRr">
+                                            <rect key="frame" x="138" y="30" width="138" height="138"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstItem="wDs-aS-TRr" firstAttribute="trailing" secondItem="CCU-GH-4Xn" secondAttribute="trailing" id="0c0-iv-FCC"/>
                                         <constraint firstItem="CCU-GH-4Xn" firstAttribute="centerX" secondItem="Zj2-Im-0eF" secondAttribute="centerX" id="1qS-YQ-9ZC"/>
                                         <constraint firstAttribute="trailing" secondItem="B20-Wf-V1s" secondAttribute="trailing" constant="30" id="6oO-5S-9qD"/>
                                         <constraint firstItem="CCU-GH-4Xn" firstAttribute="top" secondItem="Zj2-Im-0eF" secondAttribute="top" constant="30" id="94z-iq-03M"/>
+                                        <constraint firstItem="wDs-aS-TRr" firstAttribute="bottom" secondItem="CCU-GH-4Xn" secondAttribute="bottom" id="KNC-mT-Qy3"/>
                                         <constraint firstItem="B20-Wf-V1s" firstAttribute="leading" secondItem="Zj2-Im-0eF" secondAttribute="leading" constant="30" id="Mj4-mh-341"/>
+                                        <constraint firstItem="wDs-aS-TRr" firstAttribute="leading" secondItem="CCU-GH-4Xn" secondAttribute="leading" id="Ob0-kO-2l1"/>
                                         <constraint firstItem="CCU-GH-4Xn" firstAttribute="width" secondItem="Zj2-Im-0eF" secondAttribute="width" multiplier="1 / 3" id="U76-I6-Puu"/>
                                         <constraint firstItem="B20-Wf-V1s" firstAttribute="top" secondItem="CCU-GH-4Xn" secondAttribute="bottom" constant="60" id="fEi-dL-296"/>
                                         <constraint firstItem="XOL-La-FOb" firstAttribute="top" secondItem="B20-Wf-V1s" secondAttribute="bottom" constant="10" id="gKQ-l1-NSS"/>
+                                        <constraint firstItem="wDs-aS-TRr" firstAttribute="top" secondItem="CCU-GH-4Xn" secondAttribute="top" id="ldw-jM-xjv"/>
                                         <constraint firstItem="XOL-La-FOb" firstAttribute="leading" secondItem="Zj2-Im-0eF" secondAttribute="leading" constant="30" id="rcI-vw-Qhc"/>
                                         <constraint firstAttribute="trailing" secondItem="XOL-La-FOb" secondAttribute="trailing" constant="30" id="vZc-Bo-kyU"/>
                                     </constraints>

@@ -289,6 +289,7 @@
 		536BB0AF29ED096800364F27 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				538385D129FAC48A00FD7559 /* BaseImagePicker */,
 				536BB0A629ED04BA00364F27 /* TabBarControllers */,
 				536BB0AC29ED088100364F27 /* NavigationController */,
 				536BB0B229ED266500364F27 /* BaseViewController.swift */,
@@ -325,6 +326,13 @@
 				536BB0C129ED4A3900364F27 /* DCButton.xib */,
 			);
 			name = DCButton;
+			sourceTree = "<group>";
+		};
+		538385D129FAC48A00FD7559 /* BaseImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaseImagePicker;
 			sourceTree = "<group>";
 		};
 		53AD14ED29EC58D000DF1F4F = {

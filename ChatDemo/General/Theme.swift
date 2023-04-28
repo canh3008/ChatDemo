@@ -11,6 +11,7 @@ import SwifterSwift
 enum Theme: String {
     case error = "Error" // #FF4B1E
     case disable = "Disable" // #AAAAAA
+    case primaryBorder = "PrimaryBorder" // #D4D9D6
 
     var color: UIColor {
         return UIColor(named: rawValue)  ?? .green
