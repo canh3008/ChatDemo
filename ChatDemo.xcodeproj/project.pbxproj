@@ -41,6 +41,7 @@
 		536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BC29ED487B00364F27 /* BaseButton.swift */; };
 		536BB0C029ED49B700364F27 /* DCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BF29ED49B700364F27 /* DCButton.swift */; };
 		536BB0C229ED4A3900364F27 /* DCButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB0C129ED4A3900364F27 /* DCButton.xib */; };
+		538385D329FB864900FD7559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 538385D229FB864900FD7559 /* GoogleService-Info.plist */; };
 		53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14F929EC58D000DF1F4F /* AppDelegate.swift */; };
 		53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */; };
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
@@ -86,6 +87,7 @@
 		536BB0BC29ED487B00364F27 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
 		536BB0BF29ED49B700364F27 /* DCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCButton.swift; sourceTree = "<group>"; };
 		536BB0C129ED4A3900364F27 /* DCButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCButton.xib; sourceTree = "<group>"; };
+		538385D229FB864900FD7559 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		53AD14F629EC58D000DF1F4F /* ChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AD14F929EC58D000DF1F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 		536BB07529ECE26600364F27 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				538385D229FB864900FD7559 /* GoogleService-Info.plist */,
 				53AD14F929EC58D000DF1F4F /* AppDelegate.swift */,
 				53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */,
 			);
@@ -451,6 +454,7 @@
 				536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */,
 				536BB08529ECE4DB00364F27 /* LoginViewController.xib in Resources */,
 				536BB09429ECED1E00364F27 /* VieoPlayerViewController.xib in Resources */,
+				538385D329FB864900FD7559 /* GoogleService-Info.plist in Resources */,
 				536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */,
 				536BB08A29ECE4F500364F27 /* RegisterViewController.xib in Resources */,
 				536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */,
