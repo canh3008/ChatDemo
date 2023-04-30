@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RxSwift
 
 protocol ViewModelTransformable {
     associatedtype Input
@@ -14,5 +15,5 @@ protocol ViewModelTransformable {
 }
 
 class BaseViewModel {
-   
+    let disposeBag = DisposeBag()
 }

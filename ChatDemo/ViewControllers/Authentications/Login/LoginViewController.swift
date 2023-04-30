@@ -77,6 +77,18 @@ class LoginViewController: BaseViewController {
             .drive(passwordView.rx.isShowInfo)
             .disposed(by: disposeBag)
 
+        output
+            .loginSuccess
+            .drive(onNext: { [weak self] _ in
+                self?.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        output
+            .loginError
+            .drive(rx.showMessageError)
+            .disposed(by: disposeBag)
+
     }
 
     override func bindingAction() {

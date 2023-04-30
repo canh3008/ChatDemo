@@ -12,17 +12,20 @@ import RxSwift
 class LoginViewModel: BaseViewModel, ViewModelTransformable {
 
     private let validator: Validator
+    private let authentication: FirebaseAuthentication
 
     private var isShowPasswordSubject = BehaviorRelay<Bool>(value: true)
 
-    init(validator: Validator = Validator()) {
+    init(validator: Validator = Validator(),
+         authentication: FirebaseAuthentication = FirebaseAuthentication()) {
         self.validator = validator
+        self.authentication = authentication
     }
 
     func transform(input: Input) -> Output {
 
         let validateEmail = input.email
-            .flatMapLatest { [weak self] email -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -30,15 +33,15 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validateEmailError = validateEmail
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidateEmailSuccess = validateEmail
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let validatePassword = input.password
-            .flatMapLatest { [weak self] password -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -46,15 +49,39 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validatePasswordError = validatePassword
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidatePasswordSuccess = validatePassword
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let commonValidateSuccess = Driver.combineLatest(isValidatePasswordSuccess, isValidateEmailSuccess)
             .map({ $0 && $1 })
+
+        let infos = Observable
+            .combineLatest(input.email, input.password)
+            .map({ (email: $0, password: $1) })
+
+        let requestLoginEmail = input
+            .tapLogin
+            .withLatestFrom(infos)
+            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return self.authentication.logInWithEmail(with: info)
+            }
+            .share()
+
+        let loginEmailFail = requestLoginEmail
+            .mapGetMessageError()
+            .asDriverOnErrorJustComplete()
+
+        let loginEmailSuccess = requestLoginEmail
+            .mapGetResultSuccess()
+            .filter({ $0 })
+            .asDriverOnErrorJustComplete()
 
         let isShowPassword = input
             .tapShowPassword
@@ -69,7 +96,9 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
                       passwordError: validatePasswordError,
                       isPasswordSuccess: isValidatePasswordSuccess,
                       isEnableLogin: commonValidateSuccess,
-                      isShowPassword: isShowPassword)
+                      isShowPassword: isShowPassword,
+                      loginSuccess: loginEmailSuccess,
+                      loginError: loginEmailFail)
     }
 }
 
@@ -88,5 +117,7 @@ extension LoginViewModel {
         let isPasswordSuccess: Driver<Bool>
         let isEnableLogin: Driver<Bool>
         let isShowPassword: Driver<Bool>
+        let loginSuccess: Driver<Bool>
+        let loginError: Driver<String>
     }
 }

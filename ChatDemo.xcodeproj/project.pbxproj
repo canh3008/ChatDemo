@@ -42,6 +42,9 @@
 		536BB0C029ED49B700364F27 /* DCButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB0BF29ED49B700364F27 /* DCButton.swift */; };
 		536BB0C229ED4A3900364F27 /* DCButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB0C129ED4A3900364F27 /* DCButton.xib */; };
 		538385D329FB864900FD7559 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 538385D229FB864900FD7559 /* GoogleService-Info.plist */; };
+		538385D529FB888B00FD7559 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538385D429FB888B00FD7559 /* AuthenticationManager.swift */; };
+		538385D729FBC14A00FD7559 /* UIViewController+Rx+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538385D629FBC14A00FD7559 /* UIViewController+Rx+Extension.swift */; };
+		538385D929FBCB1500FD7559 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538385D829FBCB1500FD7559 /* DatabaseManager.swift */; };
 		53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14F929EC58D000DF1F4F /* AppDelegate.swift */; };
 		53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */; };
 		53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53AD150229EC58D300DF1F4F /* Assets.xcassets */; };
@@ -88,6 +91,9 @@
 		536BB0BF29ED49B700364F27 /* DCButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCButton.swift; sourceTree = "<group>"; };
 		536BB0C129ED4A3900364F27 /* DCButton.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DCButton.xib; sourceTree = "<group>"; };
 		538385D229FB864900FD7559 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		538385D429FB888B00FD7559 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		538385D629FBC14A00FD7559 /* UIViewController+Rx+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx+Extension.swift"; sourceTree = "<group>"; };
+		538385D829FBCB1500FD7559 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		53AD14F629EC58D000DF1F4F /* ChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		53AD14F929EC58D000DF1F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		53AD14FB29EC58D000DF1F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +124,7 @@
 				5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */,
 				5366E32529EE4ECA00EE48F5 /* String+Extention.swift */,
 				5366E32729EE594600EE48F5 /* Rx+Extension.swift */,
+				538385D629FBC14A00FD7559 /* UIViewController+Rx+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -259,6 +266,8 @@
 			children = (
 				536BB0A429ED01E800364F27 /* UserDefaultManager.swift */,
 				5366E32329EE38FE00EE48F5 /* Validator.swift */,
+				538385D429FB888B00FD7559 /* AuthenticationManager.swift */,
+				538385D829FBCB1500FD7559 /* DatabaseManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -533,8 +542,10 @@
 				5366E32029ED84CA00EE48F5 /* LoginViewModel.swift in Sources */,
 				5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */,
 				536BB0BB29ED43A900364F27 /* BaseTextField.swift in Sources */,
+				538385D529FB888B00FD7559 /* AuthenticationManager.swift in Sources */,
 				536BB0B729ED2F5100364F27 /* DCTextField.swift in Sources */,
 				536BB08429ECE4DB00364F27 /* LoginViewController.swift in Sources */,
+				538385D729FBC14A00FD7559 /* UIViewController+Rx+Extension.swift in Sources */,
 				5366E32229ED84E500EE48F5 /* BaseViewModel.swift in Sources */,
 				536BB08929ECE4F500364F27 /* RegisterViewController.swift in Sources */,
 				536BB09829ECED6900364F27 /* NewConversationViewController.swift in Sources */,
@@ -548,6 +559,7 @@
 				536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
 				5366E32629EE4ECA00EE48F5 /* String+Extention.swift in Sources */,
+				538385D929FBCB1500FD7559 /* DatabaseManager.swift in Sources */,
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
 				536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */,
 				53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */,

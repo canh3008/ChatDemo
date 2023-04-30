@@ -103,6 +103,18 @@ class RegisterViewController: BaseViewController {
             .drive(passwordView.rx.isShowInfo)
             .disposed(by: disposeBag)
 
+        output
+            .registerSuccess
+            .drive(onNext: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        output
+            .registerError
+            .drive(rx.showMessageError)
+            .disposed(by: disposeBag)
+
     }
 
     override func bindingAction() {

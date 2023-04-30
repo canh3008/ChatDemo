@@ -8,15 +8,15 @@
 import Foundation
 import RxSwift
 
-enum ValidationResult<Failed> {
+enum Result<Failed> {
     case success
     case failed(Failed)
 }
 
 protocol ValidateFeature {
-    associatedtype ResultValue
+    associatedtype ErrorType
     associatedtype Value
-    func checkValidate(with type: ValidationType<Value>) -> Observable<ValidationResult<ResultValue>>
+    func checkValidate(with type: ValidationType<Value>) -> Observable<Result<ErrorType>>
 }
 
 enum ValidationType<Value> {
@@ -39,7 +39,7 @@ enum MessageErrorDefault: String {
 
 class Validator: ValidateFeature {
     typealias ResultValue = String
-    func checkValidate(with type: ValidationType<String>) -> Observable<ValidationResult<ResultValue>> {
+    func checkValidate(with type: ValidationType<String>) -> Observable<Result<ResultValue>> {
         Observable.create { [weak self] observer -> Disposable in
             switch type {
             case .email(let email):
@@ -53,14 +53,14 @@ class Validator: ValidateFeature {
         }
     }
 
-    private func getEmailValidationResult(_ email: String) -> ValidationResult<ResultValue> {
+    private func getEmailValidationResult(_ email: String) -> Result<ResultValue> {
         guard !email.isEmpty else {
             return .failed(MessageErrorDefault.emailEmpty.rawValue)
         }
         return email.isValidEmail ? .success : .failed(MessageErrorDefault.email.rawValue)
     }
 
-    private func getPasswordValidationResult(_ password: String) -> ValidationResult<ResultValue> {
+    private func getPasswordValidationResult(_ password: String) -> Result<ResultValue> {
         guard !password.isEmpty else {
             return .failed(MessageErrorDefault.passwordEmpty.rawValue)
         }
@@ -68,7 +68,7 @@ class Validator: ValidateFeature {
 
     }
 
-    private func getNameValidationResult(_ name: String) -> ValidationResult<ResultValue> {
+    private func getNameValidationResult(_ name: String) -> Result<ResultValue> {
         guard !name.isEmpty else {
             return .failed(MessageErrorDefault.firstNameEmpty.rawValue)
         }

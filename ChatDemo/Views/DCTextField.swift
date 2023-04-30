@@ -97,7 +97,7 @@ extension DCTextField {
 
     fileprivate func updateUI(isShow: Bool) {
         setImageForShowButton(isShow: isShow)
-        setSecureTextForTextField(isSecureText: !isShow)
+        setSecureTextForTextField(isSecureText: isShow)
     }
 
     struct DefaultValue {

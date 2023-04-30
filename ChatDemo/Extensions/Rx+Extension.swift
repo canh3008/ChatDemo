@@ -9,8 +9,8 @@ import RxSwift
 import RxCocoa
 
 extension Observable {
-    func mapValidationError() -> Observable<String> {
-        self.map { $0 as? ValidationResult<String> }
+    func mapGetMessageError() -> Observable<String> {
+        self.map { $0 as? Result<String> }
             .compactMap({ $0 })
             .map { result -> String? in
                 switch result {
@@ -23,8 +23,8 @@ extension Observable {
             .compactMap({ $0 })
     }
 
-    func mapValidationSuccess() -> Observable<Bool> {
-        self.map { $0 as? ValidationResult<String> }
+    func mapGetResultSuccess() -> Observable<Bool> {
+        self.map { $0 as? Result<String> }
             .compactMap({ $0 })
             .map { result -> Bool in
                 switch result {

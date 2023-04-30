@@ -106,7 +106,7 @@
                                                 <userDefinedRuntimeAttribute type="color" keyPath="backgroundButton">
                                                     <color key="value" systemColor="systemGreenColor"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Log In"/>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="title" value="Register Account"/>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusButton">
                                                     <real key="value" value="10"/>
                                                 </userDefinedRuntimeAttribute>

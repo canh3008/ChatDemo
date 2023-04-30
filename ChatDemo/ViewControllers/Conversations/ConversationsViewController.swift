@@ -9,6 +9,8 @@ import UIKit
 
 class ConversationsViewController: UIViewController {
 
+    private let authentication = FirebaseAuthentication()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -20,7 +22,7 @@ class ConversationsViewController: UIViewController {
     }
 
     private func checkAuthentication() {
-        let isLoggedIn = UserDefaultManager<Bool>().getData(key: .isLoggedIn) ?? false
+        let isLoggedIn = authentication.isCurrentUser
         if !isLoggedIn {
             let viewController = LoginViewController(viewModel: LoginViewModel())
             let navigation = NavigationController(rootViewController: viewController)

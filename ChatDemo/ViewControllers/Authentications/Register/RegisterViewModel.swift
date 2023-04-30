@@ -11,17 +11,20 @@ import RxCocoa
 
 class RegisterViewModel: BaseViewModel, ViewModelTransformable {
     private let validator: Validator
+    private let authentication: FirebaseAuthentication
 
     private var isShowPasswordSubject = BehaviorRelay<Bool>(value: true)
     
-    init(validator: Validator = Validator()) {
+    init(validator: Validator = Validator(),
+         authentication: FirebaseAuthentication = FirebaseAuthentication()) {
         self.validator = validator
+        self.authentication = authentication
     }
 
     func transform(input: Input) -> Output {
         
         let validateEmail = input.email
-            .flatMapLatest { [weak self] email -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -29,15 +32,15 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validateEmailError = validateEmail
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidateEmailSuccess = validateEmail
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let validatePassword = input.password
-            .flatMapLatest { [weak self] password -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -45,15 +48,15 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validatePasswordError = validatePassword
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidatePasswordSuccess = validatePassword
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let validateFirstName = input.firstName
-            .flatMapLatest { [weak self] name -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -61,15 +64,15 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validateFirstNameError = validateFirstName
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidateFirstNameSuccess = validateFirstName
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let validateLastName = input.lastName
-            .flatMapLatest { [weak self] name -> Observable<ValidationResult<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ResultValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -77,11 +80,11 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             }
 
         let validateLastNameError = validateLastName
-            .mapValidationError()
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
         let isValidateLastNameSuccess = validateLastName
-            .mapValidationSuccess()
+            .mapGetResultSuccess()
             .asDriverOnErrorJustComplete()
 
         let commonValidateSuccess = Driver.combineLatest(isValidatePasswordSuccess,
@@ -89,6 +92,43 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
                                                          isValidateFirstNameSuccess,
                                                          isValidateLastNameSuccess)
             .map({ $0 && $1 && $2 && $3})
+
+        let infos = Observable
+            .combineLatest(input.email, input.password)
+            .map({ (email: $0, password: $1) })
+
+        let requestRegisterEmail = input
+            .tapRegister
+            .withLatestFrom(infos)
+            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return self.authentication.createAccountWithEmail(with: info)
+            }
+            .share()
+
+        let registerEmailFail = requestRegisterEmail
+            .mapGetMessageError()
+            .asDriverOnErrorJustComplete()
+
+        let registerEmailSuccess = requestRegisterEmail
+            .mapGetResultSuccess()
+            .filter({ $0 })
+
+        let chatAppUser = Observable
+            .combineLatest(input.firstName,
+                           input.lastName,
+                           input.email)
+            .map({ ChatAppUser(firstName: $0,
+                               lastName: $1,
+                               emailAddress: $2)})
+        registerEmailSuccess
+            .withLatestFrom(chatAppUser)
+            .subscribe { [weak self] chatAppUser in
+                self?.insertInfoToDatabase(user: chatAppUser)
+            }
+            .disposed(by: disposeBag)
 
         let isShowPassword = input
             .tapShowPassword
@@ -107,7 +147,13 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
                       lastNameError: validateLastNameError,
                       isLastNameSuccess: isValidateLastNameSuccess,
                       isEnableRegister: commonValidateSuccess,
-                      isShowPassword: isShowPassword)
+                      isShowPassword: isShowPassword,
+                      registerError: registerEmailFail,
+                      registerSuccess: registerEmailSuccess.asDriverOnErrorJustComplete())
+    }
+
+    private func insertInfoToDatabase(user: ChatAppUser) {
+        DatabaseManager.shared.insertUser(with: user)
     }
 }
 
@@ -132,5 +178,7 @@ extension RegisterViewModel {
         let isLastNameSuccess: Driver<Bool>
         let isEnableRegister: Driver<Bool>
         let isShowPassword: Driver<Bool>
+        let registerError: Driver<String>
+        let registerSuccess: Driver<Bool>
     }
 }
