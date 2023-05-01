@@ -25,43 +25,58 @@ protocol EmailAuthenticationFeature {
 
 class FirebaseAuthentication: EmailAuthenticationFeature {
     typealias ErrorType = String
+
+    private let loadingService: LoadingFeature
+
+    init(loadingService: LoadingFeature = LoadingService()) {
+        self.loadingService = loadingService
+    }
     
     var isCurrentUser: Bool {
-        print("zzzzzz", FirebaseAuth.Auth.auth().currentUser)
         return FirebaseAuth.Auth.auth().currentUser != nil
     }
 
     func logInWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>> {
-        Observable.create { observer -> Disposable in
+        loadingService.show()
+        return Observable.create { observer -> Disposable in
             FirebaseAuth
                 .Auth
                 .auth()
                 .signIn(withEmail: info.email,
-                        password: info.password) { _, error in
+                        password: info.password) { [weak self] _, error in
+                    guard let self = self else {
+                        return
+                    }
                     if let error = error {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
                         observer.onNext(.success)
                     }
+                    self.loadingService.hide()
                 }
             return Disposables.create()
         }
     }
 
     func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>> {
-        Observable.create { observer -> Disposable in
+        loadingService.show()
+        return Observable.create { observer -> Disposable in
             FirebaseAuth
                 .Auth
                 .auth()
                 .createUser(withEmail: info.email,
-                            password: info.password) { _, error in
+                            password: info.password) { [weak self] _, error in
+                    guard let self = self else {
+                        return
+                    }
                     if let error = error {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
                         observer.onNext(.success)
                     }
+                    self.loadingService.hide()
                 }
             return Disposables.create()
         }
