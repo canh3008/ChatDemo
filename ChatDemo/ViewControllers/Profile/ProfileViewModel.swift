@@ -22,7 +22,7 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
         let models = Observable.just(sections)
             .asDriverOnErrorJustComplete()
 
-        let requestLogOut = input
+        let requestLogOutEmail = input
             .selectedItem
             .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
@@ -30,18 +30,34 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
                 }
                 switch profile {
                 case .logout:
-                    return self.authentication.logOut()
+                    return self.authentication.logOutEmail()
                 }
             }
             .share()
 
-        let logOutSuccess = requestLogOut
+        let logOutEmailSuccess = requestLogOutEmail
             .mapGetResultSuccess()
-            .mapToVoid()
+
+        let error = requestLogOutEmail
+            .mapGetMessageError()
             .asDriverOnErrorJustComplete()
 
-        let error = requestLogOut
-            .mapGetMessageError()
+        let requestLogOutFacebook = input
+            .selectedItem
+            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                switch profile {
+                case .logout:
+                    return self.authentication.logOutFacebook()
+                }
+            }
+            .mapGetResultSuccess()
+
+        let logOutSuccess = Observable.combineLatest(logOutEmailSuccess, requestLogOutFacebook)
+            .filter({ $0 && $1 })
+            .mapToVoid()
             .asDriverOnErrorJustComplete()
 
         return Output(models: models,

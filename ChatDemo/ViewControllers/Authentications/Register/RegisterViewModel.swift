@@ -122,7 +122,8 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
                            input.email)
             .map({ ChatAppUser(firstName: $0,
                                lastName: $1,
-                               emailAddress: $2)})
+                               emailAddress: $2,
+                               token: nil)})
         registerEmailSuccess
             .withLatestFrom(chatAppUser)
             .subscribe { [weak self] chatAppUser in

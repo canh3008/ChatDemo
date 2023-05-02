@@ -76,11 +76,36 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
 
         let loginEmailFail = requestLoginEmail
             .mapGetMessageError()
-            .asDriverOnErrorJustComplete()
 
         let loginEmailSuccess = requestLoginEmail
             .mapGetResultSuccess()
             .filter({ $0 })
+
+        let requestLoginFacebook = input
+            .tapLoginWithFacebook
+            .do(onNext: { userInfo in
+                DatabaseManager.shared.insertUser(with: userInfo)
+            })
+            .flatMapLatest({ [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return self.authentication.logInWithFacebook(token: info.token ?? "")
+            })
+
+        let logInFacebookSuccess = requestLoginFacebook
+            .mapGetResultSuccess()
+            .filter({ $0 })
+
+        let logInFacebookFail = requestLoginFacebook
+            .mapGetMessageError()
+
+        let logInError = Observable
+            .merge(loginEmailFail, logInFacebookFail)
+            .asDriverOnErrorJustComplete()
+
+        let logInSuccess = Observable
+            .merge(loginEmailSuccess, logInFacebookSuccess)
             .asDriverOnErrorJustComplete()
 
         let isShowPassword = input
@@ -97,17 +122,19 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
                       isPasswordSuccess: isValidatePasswordSuccess,
                       isEnableLogin: commonValidateSuccess,
                       isShowPassword: isShowPassword,
-                      loginSuccess: loginEmailSuccess,
-                      loginError: loginEmailFail)
+                      loginSuccess: logInSuccess,
+                      loginError: logInError)
     }
 }
 
 extension LoginViewModel {
+
     struct Input {
         let email: Observable<String>
         let password: Observable<String>
         let tapLogin: Observable<Void>
         let tapShowPassword: Observable<Void>
+        let tapLoginWithFacebook: Observable<ChatAppUser>
     }
 
     struct Output {

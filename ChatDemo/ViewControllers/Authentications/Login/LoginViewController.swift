@@ -6,14 +6,18 @@
 //
 
 import UIKit
+import FBSDKLoginKit
+import RxSwift
 
 class LoginViewController: BaseViewController {
 
     @IBOutlet private weak var emailView: DCTextField!
     @IBOutlet private weak var passwordView: DCTextField!
     @IBOutlet private weak var logInButton: DCButton!
+    @IBOutlet private weak var facebookView: UIView!
 
     private let viewModel: LoginViewModel
+    private var infoFacebook = PublishSubject<ChatAppUser>()
 
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -33,6 +37,7 @@ class LoginViewController: BaseViewController {
         super.setupUI()
         title = "Log In"
         addRegisterButton()
+        addFacebookButton()
     }
 
     override func bindingData() {
@@ -40,7 +45,8 @@ class LoginViewController: BaseViewController {
         let input = LoginViewModel.Input(email: emailView.rx.text,
                                          password: passwordView.rx.text,
                                          tapLogin: logInButton.rx.tap,
-                                         tapShowPassword: passwordView.rx.tapShowInfo)
+                                         tapShowPassword: passwordView.rx.tapShowInfo,
+                                         tapLoginWithFacebook: infoFacebook)
         let output = viewModel.transform(input: input)
 
         output
@@ -106,11 +112,62 @@ class LoginViewController: BaseViewController {
                                                           target: self,
                                                           action: #selector(didTapRegister))
     }
+
+    private func addFacebookButton() {
+        let loginButton = FBLoginButton()
+        facebookView.addSubview(loginButton)
+        loginButton.anchor(top: facebookView.topAnchor,
+                           left: facebookView.leftAnchor,
+                           bottom: facebookView.bottomAnchor,
+                           right: facebookView.rightAnchor)
+        loginButton.delegate = self
+        loginButton.permissions = ["public_profile", "email"]
+
+    }
 }
 
 extension LoginViewController {
     @objc func didTapRegister() {
         let registerViewController = RegisterViewController(viewModel: RegisterViewModel())
         self.navigationController?.pushViewController(registerViewController, animated: true)
+    }
+}
+
+extension LoginViewController: LoginButtonDelegate {
+    func loginButton(_ loginButton: FBSDKLoginKit.FBLoginButton, didCompleteWith result: FBSDKLoginKit.LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else {
+            Observable
+                .just(error?.localizedDescription)
+                .compactMap({ $0 })
+                .bind(to: rx.showMessageError)
+                .disposed(by: disposeBag)
+            return
+        }
+        let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
+                                                         parameters: ["fields": "email, name"], tokenString: token, version: nil,
+                                                         httpMethod: .get)
+        facebookRequest.start { _, result, error in
+            guard let result = result as? [String: Any], error == nil else {
+                print("Fail to make facebook graph request")
+                return
+            }
+
+            guard let userName = result["name"] as? String,
+                  let email = result["email"] as? String else {
+                print("Fail to get user name and email from fb request")
+                return
+            }
+            let nameComponents = userName.components(separatedBy: " ")
+            let firstName = nameComponents[0]
+            let lastName = nameComponents[1]
+            self.infoFacebook.onNext(ChatAppUser(firstName: firstName,
+                                                  lastName: lastName,
+                                                  emailAddress: email,
+                                                  token: token))
+        }
+    }
+
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginKit.FBLoginButton) {
+        
     }
 }

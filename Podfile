@@ -13,9 +13,11 @@ target 'ChatDemo' do
   pod 'RxDataSources'
 
   # Firebase
-
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
+
+  # Facebook
+  pod 'FBSDKLoginKit'
   # Pods for ChatDemo
 
 end
