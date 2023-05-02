@@ -21,6 +21,7 @@ protocol EmailAuthenticationFeature {
     var isCurrentUser: Bool { get }
     func logInWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>>
     func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>>
+    func logOut() -> Observable<Result<ErrorType>>
 }
 
 class FirebaseAuthentication: EmailAuthenticationFeature {
@@ -78,6 +79,22 @@ class FirebaseAuthentication: EmailAuthenticationFeature {
                     }
                     self.loadingService.hide()
                 }
+            return Disposables.create()
+        }
+    }
+
+    func logOut() -> Observable<Result<ErrorType>> {
+        Observable.create { observer -> Disposable in
+            do {
+                try FirebaseAuth
+                    .Auth
+                    .auth()
+                    .signOut()
+                observer.onNext(.success)
+            }
+            catch(let error) {
+                observer.onNext(.failed(error.localizedDescription))
+            }
             return Disposables.create()
         }
     }

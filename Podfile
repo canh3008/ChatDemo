@@ -10,6 +10,7 @@ target 'ChatDemo' do
 	pod 'MessageKit'
   pod 'RxSwift'
   pod 'RxCocoa'
+  pod 'RxDataSources'
 
   # Firebase
 

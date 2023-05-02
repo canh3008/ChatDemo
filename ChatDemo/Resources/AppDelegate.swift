@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func initRootView() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ConversationsViewController()
+        window?.rootViewController = CommonTabBarViewController()
         window?.makeKeyAndVisible()
     }
 }

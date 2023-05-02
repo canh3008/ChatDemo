@@ -16,6 +16,9 @@
 		5366E32829EE594600EE48F5 /* Rx+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E32729EE594600EE48F5 /* Rx+Extension.swift */; };
 		5367CD7E29FE1B92001A6E20 /* LoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CD7D29FE1B92001A6E20 /* LoadingService.swift */; };
 		5367CD802A000D5B001A6E20 /* UIApplication+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CD7F2A000D5B001A6E20 /* UIApplication+Extension.swift */; };
+		5367CD822A00AD8D001A6E20 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CD812A00AD8D001A6E20 /* ProfileViewModel.swift */; };
+		5367CD862A00BF50001A6E20 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367CD842A00BF50001A6E20 /* ProfileTableViewCell.swift */; };
+		5367CD872A00BF50001A6E20 /* ProfileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5367CD852A00BF50001A6E20 /* ProfileTableViewCell.xib */; };
 		536BB07D29ECE30800364F27 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB07B29ECE30800364F27 /* ConversationsViewController.swift */; };
 		536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 536BB07C29ECE30800364F27 /* ConversationsViewController.xib */; };
 		536BB08429ECE4DB00364F27 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 536BB08229ECE4DB00364F27 /* LoginViewController.swift */; };
@@ -67,6 +70,9 @@
 		5366E32729EE594600EE48F5 /* Rx+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extension.swift"; sourceTree = "<group>"; };
 		5367CD7D29FE1B92001A6E20 /* LoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingService.swift; sourceTree = "<group>"; };
 		5367CD7F2A000D5B001A6E20 /* UIApplication+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extension.swift"; sourceTree = "<group>"; };
+		5367CD812A00AD8D001A6E20 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		5367CD842A00BF50001A6E20 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		5367CD852A00BF50001A6E20 /* ProfileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileTableViewCell.xib; sourceTree = "<group>"; };
 		536BB07B29ECE30800364F27 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
 		536BB07C29ECE30800364F27 /* ConversationsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationsViewController.xib; sourceTree = "<group>"; };
 		536BB08229ECE4DB00364F27 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -132,6 +138,15 @@
 				5367CD7F2A000D5B001A6E20 /* UIApplication+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5367CD832A00BF3B001A6E20 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				5367CD842A00BF50001A6E20 /* ProfileTableViewCell.swift */,
+				5367CD852A00BF50001A6E20 /* ProfileTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		536BB07529ECE26600364F27 /* Resources */ = {
@@ -251,8 +266,10 @@
 		536BB09A29ECED8100364F27 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				5367CD832A00BF3B001A6E20 /* Cells */,
 				536BB09B29ECED8E00364F27 /* ProfileViewController.swift */,
 				536BB09C29ECED8E00364F27 /* ProfileViewController.xib */,
+				5367CD812A00AD8D001A6E20 /* ProfileViewModel.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -473,6 +490,7 @@
 				536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */,
 				536BB08A29ECE4F500364F27 /* RegisterViewController.xib in Resources */,
 				536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */,
+				5367CD872A00BF50001A6E20 /* ProfileTableViewCell.xib in Resources */,
 				53AD150629EC58D300DF1F4F /* LaunchScreen.storyboard in Resources */,
 				53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */,
 				536BB08F29ECEC4D00364F27 /* PhotoViewerViewController.xib in Resources */,
@@ -566,6 +584,7 @@
 				536BB0AE29ED08AC00364F27 /* NavigationController.swift in Sources */,
 				536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
+				5367CD862A00BF50001A6E20 /* ProfileTableViewCell.swift in Sources */,
 				5366E32629EE4ECA00EE48F5 /* String+Extention.swift in Sources */,
 				538385D929FBCB1500FD7559 /* DatabaseManager.swift in Sources */,
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
@@ -579,6 +598,7 @@
 				53D2C3B829F4405700DEFFBA /* RegisterViewModel.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
 				536BB0A229ECF46600364F27 /* AppKey.swift in Sources */,
+				5367CD822A00AD8D001A6E20 /* ProfileViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
