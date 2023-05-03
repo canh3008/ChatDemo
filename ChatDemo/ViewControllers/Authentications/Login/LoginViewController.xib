@@ -68,7 +68,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fcS-b6-Omb">
-                                            <rect key="frame" x="30" y="504" width="354" height="130"/>
+                                            <rect key="frame" x="30" y="504" width="354" height="200"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VCZ-QL-TAA" userLabel="DC Button" customClass="DCButton" customModule="ChatDemo" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="354" height="60"/>
@@ -92,6 +92,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cMn-zB-a9d" userLabel="Facebook Button">
                                                     <rect key="frame" x="0.0" y="70" width="354" height="60"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9nm-SS-rQb" userLabel="Google Button" customClass="GIDSignInButton">
+                                                    <rect key="frame" x="0.0" y="140" width="354" height="60"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <connections>
+                                                        <action selector="signInSender:" destination="-1" eventType="touchUpInside" id="jH1-0W-IGd"/>
+                                                    </connections>
                                                 </view>
                                             </subviews>
                                         </stackView>

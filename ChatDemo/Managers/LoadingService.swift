@@ -15,7 +15,7 @@ protocol LoadingFeature {
 class LoadingService: LoadingFeature {
     let activity = UIActivityIndicatorView(style: .medium)
     func show() {
-        guard let window = UIApplication.shared.currentUIWindow() else {
+        guard let window = UIApplication.currentUIWindow() else {
             return
         }
         activity.backgroundColor = .gray

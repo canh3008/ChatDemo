@@ -18,6 +18,9 @@ target 'ChatDemo' do
 
   # Facebook
   pod 'FBSDKLoginKit'
+
+  # Google Sign-In
+  pod 'GoogleSignIn'
   # Pods for ChatDemo
 
 end

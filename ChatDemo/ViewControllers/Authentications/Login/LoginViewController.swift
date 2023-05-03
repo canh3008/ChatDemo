@@ -15,9 +15,10 @@ class LoginViewController: BaseViewController {
     @IBOutlet private weak var passwordView: DCTextField!
     @IBOutlet private weak var logInButton: DCButton!
     @IBOutlet private weak var facebookView: UIView!
-
+    
     private let viewModel: LoginViewModel
     private var infoFacebook = PublishSubject<ChatAppUser>()
+    private var tapGoogleLogin = PublishSubject<Void>()
 
     init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
@@ -46,7 +47,8 @@ class LoginViewController: BaseViewController {
                                          password: passwordView.rx.text,
                                          tapLogin: logInButton.rx.tap,
                                          tapShowPassword: passwordView.rx.tapShowInfo,
-                                         tapLoginWithFacebook: infoFacebook)
+                                         tapLoginWithFacebook: infoFacebook,
+                                         tapLoginWithGoogle: tapGoogleLogin)
         let output = viewModel.transform(input: input)
 
         output
@@ -123,6 +125,10 @@ class LoginViewController: BaseViewController {
         loginButton.delegate = self
         loginButton.permissions = ["public_profile", "email"]
 
+    }
+
+    @IBAction func signIn(sender: Any) {
+        self.tapGoogleLogin.onNext(())
     }
 }
 

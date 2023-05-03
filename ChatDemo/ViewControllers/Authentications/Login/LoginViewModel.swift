@@ -100,12 +100,29 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
         let logInFacebookFail = requestLoginFacebook
             .mapGetMessageError()
 
+        let requestLogInGoogle = input
+        .tapLoginWithGoogle
+        .flatMapLatest { [weak self] _ -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            guard let self = self else {
+                return .empty()
+            }
+            return self.authentication.logInWithGoogle()
+        }
+        .share()
+
+        let logInGoogleSuccess = requestLogInGoogle
+            .mapGetResultSuccess()
+            .filter({ $0 })
+
+        let logInGoogleFail = requestLogInGoogle
+            .mapGetMessageError()
+
         let logInError = Observable
-            .merge(loginEmailFail, logInFacebookFail)
+            .merge(loginEmailFail, logInFacebookFail, logInGoogleFail)
             .asDriverOnErrorJustComplete()
 
         let logInSuccess = Observable
-            .merge(loginEmailSuccess, logInFacebookSuccess)
+            .merge(loginEmailSuccess, logInFacebookSuccess, logInGoogleSuccess)
             .asDriverOnErrorJustComplete()
 
         let isShowPassword = input
@@ -135,6 +152,7 @@ extension LoginViewModel {
         let tapLogin: Observable<Void>
         let tapShowPassword: Observable<Void>
         let tapLoginWithFacebook: Observable<ChatAppUser>
+        let tapLoginWithGoogle: Observable<Void>
     }
 
     struct Output {

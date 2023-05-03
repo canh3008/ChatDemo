@@ -55,8 +55,25 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
             }
             .mapGetResultSuccess()
 
-        let logOutSuccess = Observable.combineLatest(logOutEmailSuccess, requestLogOutFacebook)
-            .filter({ $0 && $1 })
+        let requestLogOutGoogle = input
+            .selectedItem
+            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                switch profile {
+                case .logout:
+                    return self.authentication.logOutGoogle()
+                }
+            }
+            .share()
+
+        let logOutGoogleSuccess = requestLogOutGoogle
+            .mapGetResultSuccess()
+
+
+        let logOutSuccess = Observable.combineLatest(logOutEmailSuccess, requestLogOutFacebook, logOutGoogleSuccess)
+            .filter({ $0 && $1 && $2})
             .mapToVoid()
             .asDriverOnErrorJustComplete()
 
