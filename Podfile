@@ -8,6 +8,8 @@ target 'ChatDemo' do
 	pod 'SwiftLint'
 	pod 'SwifterSwift'
 	pod 'MessageKit'
+
+  # Rx Swift
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxDataSources'
@@ -21,6 +23,9 @@ target 'ChatDemo' do
 
   # Google Sign-In
   pod 'GoogleSignIn'
+
+  pod 'RealmSwift'
+  pod 'Kingfisher'
   # Pods for ChatDemo
 
 end
