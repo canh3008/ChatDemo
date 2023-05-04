@@ -25,7 +25,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
     func transform(input: Input) -> Output {
 
         let validateEmail = input.email
-            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -41,7 +41,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
             .asDriverOnErrorJustComplete()
 
         let validatePassword = input.password
-            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -66,7 +66,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
         let requestLoginEmail = input
             .tapLogin
             .withLatestFrom(infos)
-            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -86,7 +86,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
             .do(onNext: { userInfo in
                 DatabaseManager.shared.insertUser(with: userInfo)
             })
-            .flatMapLatest({ [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest({ [weak self] info -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -102,7 +102,7 @@ class LoginViewModel: BaseViewModel, ViewModelTransformable {
 
         let requestLogInGoogle = input
         .tapLoginWithGoogle
-        .flatMapLatest { [weak self] _ -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+        .flatMapLatest { [weak self] _ -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
             guard let self = self else {
                 return .empty()
             }

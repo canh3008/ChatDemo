@@ -24,7 +24,7 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
     func transform(input: Input) -> Output {
         
         let validateEmail = input.email
-            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] email -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -40,7 +40,7 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             .asDriverOnErrorJustComplete()
 
         let validatePassword = input.password
-            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] password -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -56,7 +56,7 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             .asDriverOnErrorJustComplete()
 
         let validateFirstName = input.firstName
-            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -72,7 +72,7 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
             .asDriverOnErrorJustComplete()
 
         let validateLastName = input.lastName
-            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ResultValue>> in
+            .flatMapLatest { [weak self] name -> Observable<Result<Validator.ValueReturn, Validator.ErrorValue>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -100,7 +100,7 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
         let requestRegisterEmail = input
             .tapRegister
             .withLatestFrom(infos)
-            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest { [weak self] info -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }

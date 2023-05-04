@@ -21,26 +21,28 @@ enum FirebaseAuthenticationErrorMessage: String {
 
 protocol AuthenticationFeature {
     associatedtype ErrorType
+    associatedtype ValueReturn
 }
 protocol EmailAuthenticationFeature: AuthenticationFeature {
     var isCurrentUser: Bool { get }
-    func logInWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>>
-    func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>>
-    func logOutEmail() -> Observable<Result<ErrorType>>
+    func logInWithEmail(with info: InfoAccount) -> Observable<Result<ValueReturn, ErrorType>>
+    func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ValueReturn, ErrorType>>
+    func logOutEmail() -> Observable<Result<ValueReturn, ErrorType>>
 }
 
 protocol FacebookAuthenticationFeature: AuthenticationFeature {
-    func logInWithFacebook(token: String) -> Observable<Result<ErrorType>>
-    func logOutFacebook() -> Observable<Result<ErrorType>>
+    func logInWithFacebook(token: String) -> Observable<Result<ValueReturn, ErrorType>>
+    func logOutFacebook() -> Observable<Result<ValueReturn, ErrorType>>
 }
 
 protocol GoogleAuthenticationFeature: AuthenticationFeature {
-    func logInWithGoogle() -> Observable<Result<ErrorType>>
-    func logOutGoogle() -> Observable<Result<ErrorType>>
+    func logInWithGoogle() -> Observable<Result<ValueReturn, ErrorType>>
+    func logOutGoogle() -> Observable<Result<ValueReturn, ErrorType>>
 }
 
 class FirebaseAuthentication {
     typealias ErrorType = String
+    typealias ValueReturn = Void
 
     private let loadingService: LoadingFeature
 
@@ -54,7 +56,7 @@ class FirebaseAuthentication {
 }
 
 extension FirebaseAuthentication: EmailAuthenticationFeature {
-    func logInWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>> {
+    func logInWithEmail(with info: InfoAccount) -> Observable<Result<ValueReturn, ErrorType>> {
         loadingService.show()
         return Observable.create { observer -> Disposable in
             FirebaseAuth
@@ -69,7 +71,7 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
-                        observer.onNext(.success)
+                        observer.onNext(.success(()))
                     }
                     self.loadingService.hide()
                 }
@@ -77,7 +79,7 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
         }
     }
 
-    func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ErrorType>> {
+    func createAccountWithEmail(with info: InfoAccount) -> Observable<Result<ValueReturn, ErrorType>> {
         loadingService.show()
         return Observable.create { observer -> Disposable in
             FirebaseAuth
@@ -92,7 +94,7 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
-                        observer.onNext(.success)
+                        observer.onNext(.success(()))
                     }
                     self.loadingService.hide()
                 }
@@ -100,14 +102,14 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
         }
     }
 
-    func logOutEmail() -> Observable<Result<ErrorType>> {
+    func logOutEmail() -> Observable<Result<ValueReturn, ErrorType>> {
         Observable.create { observer -> Disposable in
             do {
                 try FirebaseAuth
                     .Auth
                     .auth()
                     .signOut()
-                observer.onNext(.success)
+                observer.onNext(.success(()))
             } catch let error {
                 observer.onNext(.failed(error.localizedDescription))
             }
@@ -117,7 +119,7 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
 }
 
 extension FirebaseAuthentication: FacebookAuthenticationFeature {
-    func logInWithFacebook(token: String) -> Observable<Result<ErrorType>> {
+    func logInWithFacebook(token: String) -> Observable<Result<ValueReturn, ErrorType>> {
         loadingService.show()
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
         return Observable.create { observer -> Disposable in
@@ -132,7 +134,7 @@ extension FirebaseAuthentication: FacebookAuthenticationFeature {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
-                        observer.onNext(.success)
+                        observer.onNext(.success(()))
                     }
                     self.loadingService.hide()
                 }
@@ -140,17 +142,17 @@ extension FirebaseAuthentication: FacebookAuthenticationFeature {
         }
     }
 
-    func logOutFacebook() -> Observable<Result<ErrorType>> {
+    func logOutFacebook() -> Observable<Result<ValueReturn, ErrorType>> {
         return Observable.create { observer -> Disposable in
             FBSDKLoginKit.LoginManager().logOut()
-            observer.onNext(.success)
+            observer.onNext(.success(()))
             return Disposables.create()
         }
     }
 }
 
 extension FirebaseAuthentication: GoogleAuthenticationFeature {
-    func logInWithGoogle() -> Observable<Result<String>> {
+    func logInWithGoogle() -> Observable<Result<ValueReturn, ErrorType>> {
 
         guard let clientID = FirebaseApp.app()?.options.clientID,
               let topViewController = UIApplication.topViewController() else {
@@ -205,7 +207,7 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
                                                                             emailAddress: email,
                                                                             token: nil))
                     }
-                    observer.onNext(.success)
+                    observer.onNext(.success(()))
                     self.loadingService.hide()
                 }
             }
@@ -213,10 +215,10 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
         }
     }
 
-    func logOutGoogle() -> Observable<Result<ErrorType>> {
+    func logOutGoogle() -> Observable<Result<ValueReturn, ErrorType>> {
         return Observable.create { observer -> Disposable in
             GIDSignIn.sharedInstance.signOut()
-            observer.onNext(.success)
+            observer.onNext(.success(()))
             return Disposables.create()
         }
     }

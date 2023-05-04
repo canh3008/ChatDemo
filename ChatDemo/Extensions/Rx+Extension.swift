@@ -10,7 +10,7 @@ import RxCocoa
 
 extension Observable {
     func mapGetMessageError() -> Observable<String> {
-        self.map { $0 as? Result<String> }
+        self.map { $0 as? Result<Void, String> }
             .compactMap({ $0 })
             .map { result -> String? in
                 switch result {
@@ -24,7 +24,7 @@ extension Observable {
     }
 
     func mapGetResultSuccess() -> Observable<Bool> {
-        self.map { $0 as? Result<String> }
+        self.map { $0 as? Result<Void, String> }
             .compactMap({ $0 })
             .map { result -> Bool in
                 switch result {

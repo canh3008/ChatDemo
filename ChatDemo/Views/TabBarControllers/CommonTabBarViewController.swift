@@ -23,7 +23,7 @@ enum TabBarItem: CaseIterable {
     var navigationController: UINavigationController {
         switch self {
         case .chats:
-            let controller = ConversationsViewController()
+            let controller = ConversationsViewController(viewModel: ConversationsViewModel())
             let navigation = UINavigationController(rootViewController: controller)
             navigation.tabBarItem.title = title
             return navigation

@@ -24,7 +24,7 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
 
         let requestLogOutEmail = input
             .selectedItem
-            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -44,7 +44,7 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
 
         let requestLogOutFacebook = input
             .selectedItem
-            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }
@@ -57,7 +57,7 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
 
         let requestLogOutGoogle = input
             .selectedItem
-            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ErrorType>> in
+            .flatMapLatest { [weak self] profile -> Observable<Result<FirebaseAuthentication.ValueReturn, FirebaseAuthentication.ErrorType>> in
                 guard let self = self else {
                     return .empty()
                 }

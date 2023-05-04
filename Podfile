@@ -17,6 +17,7 @@ target 'ChatDemo' do
   # Firebase
   pod 'FirebaseAuth'
   pod 'FirebaseDatabase'
+  pod 'FirebaseStorage'
 
   # Facebook
   pod 'FBSDKLoginKit'

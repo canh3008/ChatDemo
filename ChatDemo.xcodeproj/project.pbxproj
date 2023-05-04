@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		535A566F2A025CD900FB818E /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A566D2A025CD900FB818E /* ChatViewController.swift */; };
+		535A56702A025CD900FB818E /* ChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A566E2A025CD900FB818E /* ChatViewController.xib */; };
+		535A56722A025D1E00FB818E /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56712A025D1E00FB818E /* ChatViewModel.swift */; };
+		535A56742A02686800FB818E /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56732A02686800FB818E /* ConversationsViewModel.swift */; };
+		535A56782A02696B00FB818E /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56762A02696B00FB818E /* ConversationsTableViewCell.swift */; };
+		535A56792A02696B00FB818E /* ConversationsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A56772A02696B00FB818E /* ConversationsTableViewCell.xib */; };
+		535A567D2A0275F000FB818E /* BaseEmptyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A567B2A0275F000FB818E /* BaseEmptyTableViewCell.swift */; };
+		535A567E2A0275F000FB818E /* BaseEmptyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A567C2A0275F000FB818E /* BaseEmptyTableViewCell.xib */; };
+		535A56812A027C6600FB818E /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56802A027C6600FB818E /* StorageManager.swift */; };
 		5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31A29ED6DD100EE48F5 /* BaseView.swift */; };
 		5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */; };
 		5366E32029ED84CA00EE48F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31F29ED84CA00EE48F5 /* LoginViewModel.swift */; };
@@ -61,6 +70,15 @@
 
 /* Begin PBXFileReference section */
 		5307EE162512B14B44AC6BE7 /* Pods-ChatDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatDemo.release.xcconfig"; path = "Target Support Files/Pods-ChatDemo/Pods-ChatDemo.release.xcconfig"; sourceTree = "<group>"; };
+		535A566D2A025CD900FB818E /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		535A566E2A025CD900FB818E /* ChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatViewController.xib; sourceTree = "<group>"; };
+		535A56712A025D1E00FB818E /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		535A56732A02686800FB818E /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewModel.swift; sourceTree = "<group>"; };
+		535A56762A02696B00FB818E /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
+		535A56772A02696B00FB818E /* ConversationsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationsTableViewCell.xib; sourceTree = "<group>"; };
+		535A567B2A0275F000FB818E /* BaseEmptyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEmptyTableViewCell.swift; sourceTree = "<group>"; };
+		535A567C2A0275F000FB818E /* BaseEmptyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BaseEmptyTableViewCell.xib; sourceTree = "<group>"; };
+		535A56802A027C6600FB818E /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5366E31A29ED6DD100EE48F5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5366E31F29ED84CA00EE48F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -129,6 +147,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		535A566C2A025CBB00FB818E /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				535A566D2A025CD900FB818E /* ChatViewController.swift */,
+				535A566E2A025CD900FB818E /* ChatViewController.xib */,
+				535A56712A025D1E00FB818E /* ChatViewModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		535A56752A02694F00FB818E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				535A56762A02696B00FB818E /* ConversationsTableViewCell.swift */,
+				535A56772A02696B00FB818E /* ConversationsTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		535A567A2A0275BC00FB818E /* BaseEmptyCell */ = {
+			isa = PBXGroup;
+			children = (
+				535A567B2A0275F000FB818E /* BaseEmptyTableViewCell.swift */,
+				535A567C2A0275F000FB818E /* BaseEmptyTableViewCell.xib */,
+			);
+			path = BaseEmptyCell;
+			sourceTree = "<group>";
+		};
+		535A567F2A027C4200FB818E /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				538385D829FBCB1500FD7559 /* DatabaseManager.swift */,
+				535A56802A027C6600FB818E /* StorageManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
 		5366E31C29ED6E7700EE48F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -195,8 +250,11 @@
 		536BB07A29ECE2F400364F27 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				535A56752A02694F00FB818E /* Cells */,
+				535A566C2A025CBB00FB818E /* Chat */,
 				536BB07B29ECE30800364F27 /* ConversationsViewController.swift */,
 				536BB07C29ECE30800364F27 /* ConversationsViewController.xib */,
+				535A56732A02686800FB818E /* ConversationsViewModel.swift */,
 			);
 			path = Conversations;
 			sourceTree = "<group>";
@@ -287,10 +345,10 @@
 		536BB0A329ED01B800364F27 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				535A567F2A027C4200FB818E /* Firebase */,
 				536BB0A429ED01E800364F27 /* UserDefaultManager.swift */,
 				5366E32329EE38FE00EE48F5 /* Validator.swift */,
 				538385D429FB888B00FD7559 /* AuthenticationManager.swift */,
-				538385D829FBCB1500FD7559 /* DatabaseManager.swift */,
 				5367CD7D29FE1B92001A6E20 /* LoadingService.swift */,
 			);
 			path = Managers;
@@ -325,6 +383,7 @@
 		536BB0AF29ED096800364F27 /* BaseView */ = {
 			isa = PBXGroup;
 			children = (
+				535A567A2A0275BC00FB818E /* BaseEmptyCell */,
 				538385D129FAC48A00FD7559 /* BaseImagePicker */,
 				536BB0A629ED04BA00364F27 /* TabBarControllers */,
 				536BB0AC29ED088100364F27 /* NavigationController */,
@@ -485,14 +544,17 @@
 			files = (
 				536BB0C229ED4A3900364F27 /* DCButton.xib in Resources */,
 				536BB0B929ED301A00364F27 /* DCTextField.xib in Resources */,
+				535A56702A025CD900FB818E /* ChatViewController.xib in Resources */,
 				536BB09E29ECED8E00364F27 /* ProfileViewController.xib in Resources */,
 				536BB08529ECE4DB00364F27 /* LoginViewController.xib in Resources */,
 				536BB09429ECED1E00364F27 /* VieoPlayerViewController.xib in Resources */,
 				538385D329FB864900FD7559 /* GoogleService-Info.plist in Resources */,
 				536BB09929ECED6900364F27 /* NewConversationViewController.xib in Resources */,
+				535A567E2A0275F000FB818E /* BaseEmptyTableViewCell.xib in Resources */,
 				536BB08A29ECE4F500364F27 /* RegisterViewController.xib in Resources */,
 				536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */,
 				5367CD872A00BF50001A6E20 /* ProfileTableViewCell.xib in Resources */,
+				535A56792A02696B00FB818E /* ConversationsTableViewCell.xib in Resources */,
 				53AD150629EC58D300DF1F4F /* LaunchScreen.storyboard in Resources */,
 				53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */,
 				536BB08F29ECEC4D00364F27 /* PhotoViewerViewController.xib in Resources */,
@@ -568,6 +630,7 @@
 				5366E32029ED84CA00EE48F5 /* LoginViewModel.swift in Sources */,
 				5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */,
 				5367CD802A000D5B001A6E20 /* UIApplication+Extension.swift in Sources */,
+				535A56812A027C6600FB818E /* StorageManager.swift in Sources */,
 				536BB0BB29ED43A900364F27 /* BaseTextField.swift in Sources */,
 				538385D529FB888B00FD7559 /* AuthenticationManager.swift in Sources */,
 				536BB0B729ED2F5100364F27 /* DCTextField.swift in Sources */,
@@ -575,6 +638,7 @@
 				5367CD7E29FE1B92001A6E20 /* LoadingService.swift in Sources */,
 				538385D729FBC14A00FD7559 /* UIViewController+Rx+Extension.swift in Sources */,
 				5366E32229ED84E500EE48F5 /* BaseViewModel.swift in Sources */,
+				535A567D2A0275F000FB818E /* BaseEmptyTableViewCell.swift in Sources */,
 				536BB08929ECE4F500364F27 /* RegisterViewController.swift in Sources */,
 				536BB09829ECED6900364F27 /* NewConversationViewController.swift in Sources */,
 				536BB0B129ED09A800364F27 /* BarButtonItem.swift in Sources */,
@@ -583,11 +647,13 @@
 				536BB09329ECED1E00364F27 /* VieoPlayerViewController.swift in Sources */,
 				536BB0C029ED49B700364F27 /* DCButton.swift in Sources */,
 				53C5D85429F1767200A6B063 /* Theme.swift in Sources */,
+				535A56742A02686800FB818E /* ConversationsViewModel.swift in Sources */,
 				536BB0AE29ED08AC00364F27 /* NavigationController.swift in Sources */,
 				536BB0BD29ED487B00364F27 /* BaseButton.swift in Sources */,
 				53AD14FA29EC58D000DF1F4F /* AppDelegate.swift in Sources */,
 				5367CD862A00BF50001A6E20 /* ProfileTableViewCell.swift in Sources */,
 				5366E32629EE4ECA00EE48F5 /* String+Extention.swift in Sources */,
+				535A56782A02696B00FB818E /* ConversationsTableViewCell.swift in Sources */,
 				538385D929FBCB1500FD7559 /* DatabaseManager.swift in Sources */,
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
 				536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */,
@@ -595,9 +661,11 @@
 				536BB0AB29ED069100364F27 /* CommonTabBarViewController.swift in Sources */,
 				536BB0A929ED04E700364F27 /* TabBarController.swift in Sources */,
 				536BB0B329ED266500364F27 /* BaseViewController.swift in Sources */,
+				535A56722A025D1E00FB818E /* ChatViewModel.swift in Sources */,
 				5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */,
 				5366E32429EE38FE00EE48F5 /* Validator.swift in Sources */,
 				53D2C3B829F4405700DEFFBA /* RegisterViewModel.swift in Sources */,
+				535A566F2A025CD900FB818E /* ChatViewController.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,
 				536BB0A229ECF46600364F27 /* AppKey.swift in Sources */,
 				5367CD822A00AD8D001A6E20 /* ProfileViewModel.swift in Sources */,

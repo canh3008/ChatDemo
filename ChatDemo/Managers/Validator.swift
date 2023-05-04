@@ -8,15 +8,16 @@
 import Foundation
 import RxSwift
 
-enum Result<Failed> {
-    case success
+enum Result<Value, Failed> {
+    case success(Value)
     case failed(Failed)
 }
 
 protocol ValidateFeature {
     associatedtype ErrorType
     associatedtype Value
-    func checkValidate(with type: ValidationType<Value>) -> Observable<Result<ErrorType>>
+    associatedtype ValueReturn
+    func checkValidate(with type: ValidationType<Value>) -> Observable<Result<ValueReturn, ErrorType>>
 }
 
 enum ValidationType<Value> {
@@ -38,8 +39,9 @@ enum MessageErrorDefault: String {
 }
 
 class Validator: ValidateFeature {
-    typealias ResultValue = String
-    func checkValidate(with type: ValidationType<String>) -> Observable<Result<ResultValue>> {
+    typealias ValueReturn = Void
+    typealias ErrorValue = String
+    func checkValidate(with type: ValidationType<String>) -> Observable<Result<ValueReturn, ErrorValue>> {
         Observable.create { [weak self] observer -> Disposable in
             switch type {
             case .email(let email):
@@ -53,25 +55,25 @@ class Validator: ValidateFeature {
         }
     }
 
-    private func getEmailValidationResult(_ email: String) -> Result<ResultValue> {
+    private func getEmailValidationResult(_ email: String) -> Result<ValueReturn, ErrorValue> {
         guard !email.isEmpty else {
             return .failed(MessageErrorDefault.emailEmpty.rawValue)
         }
-        return email.isValidEmail ? .success : .failed(MessageErrorDefault.email.rawValue)
+        return email.isValidEmail ? .success(()) : .failed(MessageErrorDefault.email.rawValue)
     }
 
-    private func getPasswordValidationResult(_ password: String) -> Result<ResultValue> {
+    private func getPasswordValidationResult(_ password: String) -> Result<ValueReturn, ErrorValue> {
         guard !password.isEmpty else {
             return .failed(MessageErrorDefault.passwordEmpty.rawValue)
         }
-        return password.isValidatePassword() ? .success : .failed(MessageErrorDefault.email.rawValue)
+        return password.isValidatePassword() ? .success(()) : .failed(MessageErrorDefault.email.rawValue)
 
     }
 
-    private func getNameValidationResult(_ name: String) -> Result<ResultValue> {
+    private func getNameValidationResult(_ name: String) -> Result<ValueReturn, ErrorValue> {
         guard !name.isEmpty else {
             return .failed(MessageErrorDefault.firstNameEmpty.rawValue)
         }
-        return name.isValidateName() ? .success : .failed(MessageErrorDefault.firstName.rawValue)
+        return name.isValidateName() ? .success(()) : .failed(MessageErrorDefault.firstName.rawValue)
     }
 }
