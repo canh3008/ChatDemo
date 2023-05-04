@@ -8,6 +8,7 @@
 import UIKit
 import FBSDKLoginKit
 import RxSwift
+import Kingfisher
 
 class LoginViewController: BaseViewController {
 
@@ -150,7 +151,9 @@ extension LoginViewController: LoginButtonDelegate {
             return
         }
         let facebookRequest = FBSDKLoginKit.GraphRequest(graphPath: "me",
-                                                         parameters: ["fields": "email, name"], tokenString: token, version: nil,
+                                                         parameters: ["fields": "first_name, last_name, picture.type(large), email"],
+                                                         tokenString: token,
+                                                         version: nil,
                                                          httpMethod: .get)
         facebookRequest.start { _, result, error in
             guard let result = result as? [String: Any], error == nil else {
@@ -158,18 +161,32 @@ extension LoginViewController: LoginButtonDelegate {
                 return
             }
 
-            guard let userName = result["name"] as? String,
-                  let email = result["email"] as? String else {
-                print("Fail to get user name and email from fb request")
-                return
+            guard let firstName = result["first_name"] as? String,
+                  let lastName = result["last_name"] as? String,
+                  let email = result["email"] as? String,
+                  let picture = result["picture"] as? [String: Any],
+                  let imgData = picture["data"] as? [String: Any],
+                  let imgUrl = imgData["url"] as? String,
+                  let url = URL(string: imgUrl) else {
+                    print("Fail to get user name and email from fb request")
+                    return
             }
-            let nameComponents = userName.components(separatedBy: " ")
-            let firstName = nameComponents[0]
-            let lastName = nameComponents[1]
-            self.infoFacebook.onNext(ChatAppUser(firstName: firstName,
-                                                  lastName: lastName,
-                                                  emailAddress: email,
-                                                  token: token))
+
+            KingfisherManager.shared.retrieveImage(with: ImageResource(downloadURL: url)) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+                switch result {
+                case .success(let value):
+                    self.infoFacebook.onNext(ChatAppUser(firstName: firstName,
+                                                          lastName: lastName,
+                                                          emailAddress: email,
+                                                         token: token,
+                                                         image: value.image))
+                case .failure:
+                    print("Error retrieve image")
+                }
+            }
         }
     }
 

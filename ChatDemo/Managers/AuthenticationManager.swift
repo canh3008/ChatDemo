@@ -11,6 +11,7 @@ import FirebaseCore
 import RxSwift
 import FBSDKLoginKit
 import GoogleSignIn
+import Kingfisher
 
 typealias InfoAccount = (email: String, password: String)
 
@@ -187,7 +188,8 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
                     }
                     guard let user = result?.user,
                           let email = user.email,
-                          let name = user.displayName else {
+                          let name = user.displayName,
+                          let imageUrl = user.photoURL else {
                         observer.onNext(.failed("Not get user from google account"))
                         self.loadingService.hide()
                         return
@@ -202,10 +204,18 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
                     let lastName = nameComponents[1]
                     let concurrentQueue = DispatchQueue(label: "Insert user", qos: .background)
                     concurrentQueue.async {
-                        DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
-                                                                            lastName: lastName,
-                                                                            emailAddress: email,
-                                                                            token: nil))
+                        KingfisherManager.shared.retrieveImage(with: ImageResource(downloadURL: imageUrl)) { result in
+                            switch result {
+                            case .success(let value):
+                                DatabaseManager.shared.insertUser(with: ChatAppUser(firstName: firstName,
+                                                                                    lastName: lastName,
+                                                                                    emailAddress: email,
+                                                                                    token: nil,
+                                                                                    image: value.image))
+                            case .failure(_):
+                                observer.onNext(.failed("Fail to retrieve image"))
+                            }
+                        }
                     }
                     observer.onNext(.success(()))
                     self.loadingService.hide()

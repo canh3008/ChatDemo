@@ -18,18 +18,11 @@ class StorageManager: StorageFeature {
     typealias ValueReturn = String
 
     private let storage = Storage.storage().reference()
-    private let loadingService: LoadingFeature
-
-    init(loadingService: LoadingFeature = LoadingService()) {
-        self.loadingService = loadingService
-    }
-
     /*
      /images/canh-gmail-com_profile_picture.png
      */
 
     func uploadProfilePicture(with data: Data, fileName: String) -> Observable<Result<ValueReturn, ErrorType>> {
-        loadingService.show()
         return Observable.create { observer -> Disposable in
             self.storage.child("/images/\(fileName)").putData(data) { metaData, error in
                 guard error == nil else {
@@ -43,7 +36,6 @@ class StorageManager: StorageFeature {
                     }
                     let urlString = url.absoluteString
                     observer.onNext(.success(urlString))
-                    self.loadingService.hide()
                 }
             }
             return Disposables.create()

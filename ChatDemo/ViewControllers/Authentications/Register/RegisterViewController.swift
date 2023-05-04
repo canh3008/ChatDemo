@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import RxSwift
 
 class RegisterViewController: BaseViewController {
 
@@ -18,6 +19,7 @@ class RegisterViewController: BaseViewController {
     @IBOutlet private weak var changePictureButton: UIButton!
     @IBOutlet private weak var personImageView: UIImageView!
 
+    private var picture = PublishSubject<UIImage?>()
     private let viewModel: RegisterViewModel
 
     init(viewModel: RegisterViewModel) {
@@ -42,7 +44,8 @@ class RegisterViewController: BaseViewController {
                                             email: emailView.rx.text,
                                             password: passwordView.rx.text,
                                             tapRegister: registerButton.rx.tap,
-                                            tapShowPassword: passwordView.rx.tapShowInfo)
+                                            tapShowPassword: passwordView.rx.tapShowInfo,
+                                            profilePicture: picture)
         let output = viewModel.transform(input: input)
 
         output
@@ -186,6 +189,7 @@ extension RegisterViewController {
                 if let image = object as? UIImage {
                     DispatchQueue.main.async {
                         self?.personImageView.image = image
+                        self?.picture.onNext(image)
                         complete()
                     }
                 }

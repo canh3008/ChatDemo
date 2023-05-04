@@ -119,11 +119,13 @@ class RegisterViewModel: BaseViewModel, ViewModelTransformable {
         let chatAppUser = Observable
             .combineLatest(input.firstName,
                            input.lastName,
-                           input.email)
+                           input.email,
+                           input.profilePicture)
             .map({ ChatAppUser(firstName: $0,
                                lastName: $1,
                                emailAddress: $2,
-                               token: nil)})
+                               token: nil,
+                               image: $3)})
         registerEmailSuccess
             .withLatestFrom(chatAppUser)
             .subscribe { [weak self] chatAppUser in
@@ -166,6 +168,7 @@ extension RegisterViewModel {
         let password: Observable<String>
         let tapRegister: Observable<Void>
         let tapShowPassword: Observable<Void>
+        let profilePicture: Observable<UIImage?>
     }
 
     struct Output {
