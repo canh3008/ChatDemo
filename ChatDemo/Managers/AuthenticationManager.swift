@@ -212,7 +212,7 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
                                                                                     emailAddress: email,
                                                                                     token: nil,
                                                                                     image: value.image))
-                            case .failure(_):
+                            case .failure:
                                 observer.onNext(.failed("Fail to retrieve image"))
                             }
                         }

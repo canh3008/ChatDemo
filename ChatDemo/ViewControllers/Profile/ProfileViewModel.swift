@@ -12,9 +12,15 @@ import RxDataSources
 
 class ProfileViewModel: BaseViewModel, ViewModelTransformable {
     private let authentication: FirebaseAuthentication
+    private let storageManager: StorageManager
+    private let saveLocalManager: SaveAccountManager
 
-    init(authentication: FirebaseAuthentication = FirebaseAuthentication()) {
+    init(authentication: FirebaseAuthentication = FirebaseAuthentication(),
+         storageManager: StorageManager = StorageManager(),
+         saveLocalManager: SaveAccountManager = SaveAccountManager()) {
         self.authentication = authentication
+        self.storageManager = storageManager
+        self.saveLocalManager = saveLocalManager
     }
 
     func transform(input: Input) -> Output {
@@ -71,15 +77,24 @@ class ProfileViewModel: BaseViewModel, ViewModelTransformable {
         let logOutGoogleSuccess = requestLogOutGoogle
             .mapGetResultSuccess()
 
-
         let logOutSuccess = Observable.combineLatest(logOutEmailSuccess, requestLogOutFacebook, logOutGoogleSuccess)
             .filter({ $0 && $1 && $2})
             .mapToVoid()
             .asDriverOnErrorJustComplete()
 
+        let getImageUrl = Observable.just(saveLocalManager.getData(key: .pictureFileName))
+            .map({ "/images/\($0)" })
+            .flatMapLatest({
+                self.storageManager.downloadURL(for: $0)
+            })
+            .mapGetResultValue()
+            .compactMap({ URL(string: $0) })
+            .asDriverOnErrorJustComplete()
+
         return Output(models: models,
                       logOutSuccess: logOutSuccess,
-                      error: error)
+                      error: error,
+                      profilePictureUrl: getImageUrl)
     }
 }
 
@@ -92,6 +107,7 @@ extension ProfileViewModel {
         let models: Driver<[ProfileSection]>
         let logOutSuccess: Driver<Void>
         let error: Driver<String>
+        let profilePictureUrl: Driver<URL>
     }
 }
 

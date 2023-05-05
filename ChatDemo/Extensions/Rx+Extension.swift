@@ -36,6 +36,20 @@ extension Observable {
             }
     }
 
+    func mapGetResultValue<V>() -> Observable<V> {
+        self.map({ $0 as? Result<V, String> })
+            .compactMap({ $0 })
+            .map { result -> V? in
+                switch result {
+                case .success(let value):
+                    return value
+                case .failed:
+                    return nil
+                }
+            }
+            .compactMap({ $0 })
+    }
+
     func mapToVoid() -> Observable<Void> {
         self.map { _ -> Void in () }
     }

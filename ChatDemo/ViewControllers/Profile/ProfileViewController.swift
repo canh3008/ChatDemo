@@ -13,6 +13,8 @@ import RxSwift
 class ProfileViewController: BaseViewController {
 
     @IBOutlet private weak var tableView: UITableView!
+
+    private var profileHeaderView: ProfileHeaderView!
     private let viewModel: ProfileViewModel
 
     init(viewModel: ProfileViewModel) {
@@ -33,6 +35,7 @@ class ProfileViewController: BaseViewController {
         super.setupUI()
         title = "Profile"
         self.navigationController?.navigationBar.prefersLargeTitles = true
+
     }
 
     override func bindingData() {
@@ -62,10 +65,22 @@ class ProfileViewController: BaseViewController {
             .drive(tableView.rx.items(dataSource: getDataSourceAnimated()))
             .disposed(by: disposeBag)
 
+        output
+            .profilePictureUrl
+            .drive { [weak self] imageUrl in
+                self?.profileHeaderView.setupUI(with: imageUrl)
+            }
+            .disposed(by: disposeBag)
+
     }
 
     private func setupTableView() {
         tableView.register(nibWithCellClass: ProfileTableViewCell.self)
+        self.profileHeaderView = ProfileHeaderView(frame: CGRect(x: 0,
+                                                                 y: 0,
+                                                                 width: tableView.frame.width,
+                                                                 height: 200))
+        tableView.tableHeaderView = self.profileHeaderView
     }
 
     private func getDataSourceAnimated() -> RxTableViewSectionedAnimatedDataSource<ProfileSection> {
