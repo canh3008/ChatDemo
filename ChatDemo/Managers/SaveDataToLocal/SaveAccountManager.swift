@@ -10,6 +10,7 @@ import Foundation
 enum KeySave: String {
     case email = "email_account"
     case pictureFileName = "picture_file_name"
+    case fullName = "full_name_account"
 }
 
 protocol SaveDataLocalFeature {

@@ -89,6 +89,7 @@ class LoginViewController: BaseViewController {
         output
             .loginSuccess
             .drive(onNext: { [weak self] _ in
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "login_success"), object: nil)
                 self?.dismiss(animated: true)
             })
             .disposed(by: disposeBag)

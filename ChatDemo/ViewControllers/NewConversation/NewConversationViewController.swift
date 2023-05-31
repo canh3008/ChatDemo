@@ -6,12 +6,29 @@
 //
 
 import UIKit
+import RxSwift
 
 class NewConversationViewController: BaseViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
-    private var models: [String] = []
+    var completion: ((User) -> Void)?
+    private lazy var models: [User] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    private var textSearchSubject = PublishSubject<String>()
+    private let viewModel: NewConversationViewModel
+
+    init(viewModel: NewConversationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     private let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -25,6 +42,23 @@ class NewConversationViewController: BaseViewController {
         setupTableView()
     }
 
+    override func bindingData() {
+        super.bindingData()
+        let input = NewConversationViewModel.Input(textSearch: textSearchSubject)
+
+        let output = viewModel.transform(input: input)
+
+        output
+            .allUsers
+            .drive { [weak self] users in
+                guard let self = self else {
+                    return
+                }
+                self.models = users
+            }
+            .disposed(by: disposeBag)
+    }
+
     override func setupUI() {
         super.setupUI()
         navigationController?.navigationBar.topItem?.titleView = searchBar
@@ -32,13 +66,13 @@ class NewConversationViewController: BaseViewController {
                                                             style: .done,
                                                             target: self,
                                                             action: #selector(didTapCancel))
-        searchBar.becomeFirstResponder()
     }
 
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(nibWithCellClass: BaseEmptyTableViewCell.self)
+        tableView.register(nibWithCellClass: NewConversationTableViewCell.self)
     }
 
     @objc func didTapCancel() {
@@ -48,7 +82,12 @@ class NewConversationViewController: BaseViewController {
 }
 
 extension NewConversationViewController: UISearchBarDelegate {
-
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else {
+            return
+        }
+        self.textSearchSubject.onNext(text)
+    }
 }
 
 extension NewConversationViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,8 +102,25 @@ extension NewConversationViewController: UITableViewDelegate, UITableViewDataSou
             cell.config(with: "No Result")
             return cell
         } else {
-            return UITableViewCell()
+            guard indexPath.row < models.count else {
+                return UITableViewCell()
+            }
+            let cell = tableView.dequeueReusableCell(withClass: NewConversationTableViewCell.self)
+            cell.config(with: models[indexPath.row].name)
+            return cell
         }
 
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row < models.count else {
+            return
+        }
+        self.dismiss(animated: true) { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.completion?(self.models[indexPath.row])
+        }
     }
 }

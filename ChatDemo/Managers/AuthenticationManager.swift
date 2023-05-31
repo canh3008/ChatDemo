@@ -46,9 +46,12 @@ class FirebaseAuthentication {
     typealias ValueReturn = Void
 
     private let loadingService: LoadingFeature
+    private let saveAccountManager: SaveAccountManager
 
-    init(loadingService: LoadingFeature = LoadingService()) {
+    init(loadingService: LoadingFeature = LoadingService(),
+         saveAccountManager: SaveAccountManager = SaveAccountManager()) {
         self.loadingService = loadingService
+        self.saveAccountManager = saveAccountManager
     }
     
     var isCurrentUser: Bool {
@@ -64,14 +67,19 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
                 .Auth
                 .auth()
                 .signIn(withEmail: info.email,
-                        password: info.password) { [weak self] _, error in
+                        password: info.password) { [weak self] result, error in
                     guard let self = self else {
                         return
                     }
+                    let name = result?.user.displayName ?? ""
                     if let error = error {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))
                     } else {
+                        self.saveAccountManager.setData(with: info.email, key: .email)
+                        DatabaseManager.shared.getInfoCurrentUser { fullName in
+                            self.saveAccountManager.setData(with: fullName, key: .fullName)
+                        }
                         observer.onNext(.success(()))
                     }
                     self.loadingService.hide()
@@ -194,6 +202,8 @@ extension FirebaseAuthentication: GoogleAuthenticationFeature {
                         self.loadingService.hide()
                         return
                     }
+                    self.saveAccountManager.setData(with: email, key: .email)
+                    self.saveAccountManager.setData(with: name, key: .fullName)
                     let nameComponents = name.components(separatedBy: " ")
                     guard nameComponents.count > 1 else {
                         observer.onNext(.failed("Not get user from google account"))

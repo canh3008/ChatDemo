@@ -29,4 +29,12 @@ extension String {
         let namePred = NSPredicate(format: "SELF MATCHES %@", nameRegEx)
         return namePred.evaluate(with: self)
     }
+
+    func dateDefaultFormatter() -> Date {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .long
+        formatter.locale = .current
+        return formatter.date(from: self) ?? Date()
+    }
 }

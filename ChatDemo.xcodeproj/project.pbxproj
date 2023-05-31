@@ -20,6 +20,11 @@
 		535A56862A0406B000FB818E /* ProfileHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A56852A0406B000FB818E /* ProfileHeaderView.xib */; };
 		535A56892A04ACE500FB818E /* SaveAccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56882A04ACE500FB818E /* SaveAccountManager.swift */; };
 		535A568B2A04BC4D00FB818E /* UIImageView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A568A2A04BC4D00FB818E /* UIImageView+Extension.swift */; };
+		535A568D2A04E16200FB818E /* Dictionary+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A568C2A04E16200FB818E /* Dictionary+Extension.swift */; };
+		535A568F2A04E59A00FB818E /* NewConversationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A568E2A04E59A00FB818E /* NewConversationViewModel.swift */; };
+		535A56932A05059F00FB818E /* NewConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56912A05059F00FB818E /* NewConversationTableViewCell.swift */; };
+		535A56942A05059F00FB818E /* NewConversationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 535A56922A05059F00FB818E /* NewConversationTableViewCell.xib */; };
+		535A56962A076C9200FB818E /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 535A56952A076C9200FB818E /* Date+Extension.swift */; };
 		5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31A29ED6DD100EE48F5 /* BaseView.swift */; };
 		5366E31E29ED6E9500EE48F5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */; };
 		5366E32029ED84CA00EE48F5 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5366E31F29ED84CA00EE48F5 /* LoginViewModel.swift */; };
@@ -87,6 +92,11 @@
 		535A56852A0406B000FB818E /* ProfileHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileHeaderView.xib; sourceTree = "<group>"; };
 		535A56882A04ACE500FB818E /* SaveAccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveAccountManager.swift; sourceTree = "<group>"; };
 		535A568A2A04BC4D00FB818E /* UIImageView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extension.swift"; sourceTree = "<group>"; };
+		535A568C2A04E16200FB818E /* Dictionary+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extension.swift"; sourceTree = "<group>"; };
+		535A568E2A04E59A00FB818E /* NewConversationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationViewModel.swift; sourceTree = "<group>"; };
+		535A56912A05059F00FB818E /* NewConversationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationTableViewCell.swift; sourceTree = "<group>"; };
+		535A56922A05059F00FB818E /* NewConversationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewConversationTableViewCell.xib; sourceTree = "<group>"; };
+		535A56952A076C9200FB818E /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		5366E31A29ED6DD100EE48F5 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		5366E31D29ED6E9500EE48F5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		5366E31F29ED84CA00EE48F5 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
@@ -209,6 +219,15 @@
 			path = SaveDataToLocal;
 			sourceTree = "<group>";
 		};
+		535A56902A05058200FB818E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				535A56912A05059F00FB818E /* NewConversationTableViewCell.swift */,
+				535A56922A05059F00FB818E /* NewConversationTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		5366E31C29ED6E7700EE48F5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +237,8 @@
 				538385D629FBC14A00FD7559 /* UIViewController+Rx+Extension.swift */,
 				5367CD7F2A000D5B001A6E20 /* UIApplication+Extension.swift */,
 				535A568A2A04BC4D00FB818E /* UIImageView+Extension.swift */,
+				535A568C2A04E16200FB818E /* Dictionary+Extension.swift */,
+				535A56952A076C9200FB818E /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,8 +363,10 @@
 		536BB09529ECED5600364F27 /* NewConversation */ = {
 			isa = PBXGroup;
 			children = (
+				535A56902A05058200FB818E /* Cells */,
 				536BB09629ECED6900364F27 /* NewConversationViewController.swift */,
 				536BB09729ECED6900364F27 /* NewConversationViewController.xib */,
+				535A568E2A04E59A00FB818E /* NewConversationViewModel.swift */,
 			);
 			path = NewConversation;
 			sourceTree = "<group>";
@@ -584,6 +607,7 @@
 				536BB07E29ECE30800364F27 /* ConversationsViewController.xib in Resources */,
 				5367CD872A00BF50001A6E20 /* ProfileTableViewCell.xib in Resources */,
 				535A56792A02696B00FB818E /* ConversationsTableViewCell.xib in Resources */,
+				535A56942A05059F00FB818E /* NewConversationTableViewCell.xib in Resources */,
 				53AD150629EC58D300DF1F4F /* LaunchScreen.storyboard in Resources */,
 				53AD150329EC58D300DF1F4F /* Assets.xcassets in Resources */,
 				536BB08F29ECEC4D00364F27 /* PhotoViewerViewController.xib in Resources */,
@@ -688,13 +712,17 @@
 				536BB09D29ECED8E00364F27 /* ProfileViewController.swift in Sources */,
 				535A568B2A04BC4D00FB818E /* UIImageView+Extension.swift in Sources */,
 				536BB0A529ED01E800364F27 /* UserDefaultManager.swift in Sources */,
+				535A56962A076C9200FB818E /* Date+Extension.swift in Sources */,
 				53AD14FC29EC58D000DF1F4F /* SceneDelegate.swift in Sources */,
 				536BB0AB29ED069100364F27 /* CommonTabBarViewController.swift in Sources */,
 				536BB0A929ED04E700364F27 /* TabBarController.swift in Sources */,
+				535A568D2A04E16200FB818E /* Dictionary+Extension.swift in Sources */,
+				535A568F2A04E59A00FB818E /* NewConversationViewModel.swift in Sources */,
 				536BB0B329ED266500364F27 /* BaseViewController.swift in Sources */,
 				535A56722A025D1E00FB818E /* ChatViewModel.swift in Sources */,
 				5366E31B29ED6DD100EE48F5 /* BaseView.swift in Sources */,
 				5366E32429EE38FE00EE48F5 /* Validator.swift in Sources */,
+				535A56932A05059F00FB818E /* NewConversationTableViewCell.swift in Sources */,
 				53D2C3B829F4405700DEFFBA /* RegisterViewModel.swift in Sources */,
 				535A566F2A025CD900FB818E /* ChatViewController.swift in Sources */,
 				536BB08E29ECEC4D00364F27 /* PhotoViewerViewController.swift in Sources */,

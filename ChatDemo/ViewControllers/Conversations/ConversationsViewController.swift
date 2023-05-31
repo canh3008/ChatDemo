@@ -13,7 +13,11 @@ class ConversationsViewController: BaseViewController {
 
     private let authentication = FirebaseAuthentication()
     private let viewModel: ConversationsViewModel
-    private var models = ["Hello World"]
+    private lazy var models: [Conversation] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     init(viewModel: ConversationsViewModel) {
         self.viewModel = viewModel
@@ -30,11 +34,20 @@ class ConversationsViewController: BaseViewController {
         setupTableView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func bindingData() {
+        super.bindingData()
+        let input = ConversationsViewModel.Input()
+
+        let output = viewModel.transform(input: input)
+
+        output
+            .allConversations
+            .drive { [weak self] conversations in
+                self?.models = conversations
+            }
+            .disposed(by: disposeBag)
 
     }
-
     override func setupUI() {
         super.setupUI()
         title = "Chats"
@@ -45,7 +58,10 @@ class ConversationsViewController: BaseViewController {
     }
 
     @objc func didTapCompose() {
-        let newConversation = NewConversationViewController()
+        let newConversation = NewConversationViewController(viewModel: NewConversationViewModel())
+        newConversation.completion = { [weak self] user in
+            self?.createNewConversation(with: user)
+        }
         let navigation = UINavigationController(rootViewController: newConversation)
         present(navigation, animated: true)
     }
@@ -65,6 +81,11 @@ class ConversationsViewController: BaseViewController {
             navigation.modalPresentationStyle = .fullScreen
             self.present(navigation, animated: true)
         }
+    }
+
+    private func createNewConversation(with user: User) {
+        let chatViewController = ChatViewController(viewModel: ChatViewModel(user: user, isNewConversation: true))
+        navigationController?.pushViewController(chatViewController, animated: true)
     }
 }
 
@@ -93,7 +114,9 @@ extension ConversationsViewController: UITableViewDelegate, UITableViewDataSourc
         guard indexPath.row < models.count else {
             return
         }
-        let chatVC = ChatViewController(viewModel: ChatViewModel())
+        let model = models[indexPath.row]
+        let chatVC = ChatViewController(viewModel: ChatViewModel(user: User(name: model.name,
+                                                                            email: model.otherUserEmail), id: model.id))
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
 }
