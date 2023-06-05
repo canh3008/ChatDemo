@@ -17,7 +17,7 @@ class ChatViewController: MessagesViewController {
     private let viewModel: ChatViewModel
     private var messages = [Message]() {
         didSet {
-            messagesCollectionView.reloadDataAndKeepOffset()
+            messagesCollectionView.reloadData()
         }
     }
     private var selfSender: Sender?
@@ -55,6 +55,12 @@ class ChatViewController: MessagesViewController {
             .isSendMessageSuccess
             .drive { isSuccess in
                 print("zzzzzzzzzzz is send message", isSuccess)
+            }
+            .disposed(by: disposeBag)
+
+        output.updateLatestMessageSuccess
+            .drive { isSuccess in
+                print("zzzzzzzzzzz is update message", isSuccess)
             }
             .disposed(by: disposeBag)
 

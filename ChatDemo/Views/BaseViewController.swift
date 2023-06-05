@@ -43,6 +43,8 @@ class BaseViewController: UIViewController, FeatureCommonBase, BindingBase {
         setupUI()
         bindingData()
         bindingAction()
+
+        print("Init:", String(describing: Self.self))
     }
 
     func setupUI() {

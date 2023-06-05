@@ -81,7 +81,7 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
     }
 
     func transform(input: Input) -> Output {
-        let createNewConversation: Driver<Bool> = input
+        let createNewConversation: Observable<Bool> = input
             .newMessage
             .filter({ _ in self.isNewConversation })
             .map({ self.createMessage(text: $0) })
@@ -94,12 +94,14 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
                                                                     firstMessage: message)
             }
             .mapGetResultValue()
-            .asDriverOnErrorJustComplete()
 
-        let sendMessage: Driver<Bool> = input
+         let message = input
             .newMessage
             .filter({ _ in !self.isNewConversation })
             .map({ self.createMessage(text: $0) })
+            .share()
+
+        let sendMessage: Observable<Bool> = message
             .flatMapLatest { [weak self] message -> Observable<Result<Bool, String>> in
                 guard let self = self else {
                     return .empty()
@@ -107,7 +109,32 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
                 return DatabaseManager.shared.sendMessage(to: self.messageId, message: message)
             }
             .mapGetResultValue()
+
+        let updateLastMessageCurrentEmail: Observable<Bool> = message
+            .flatMapLatest { [weak self] message -> Observable<Result<Bool, String>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return DatabaseManager.shared.updateLastMessage(email: .current(self.currentEmail),
+                                                                conversationId: self.messageId,
+                                                                firstMessage: message)
+            }
+            .mapGetResultValue()
+
+        let updateLastMessageOtherEmail: Observable<Bool> = message
+            .flatMapLatest { [weak self] message -> Observable<Result<Bool, String>> in
+                guard let self = self else {
+                    return .empty()
+                }
+                return DatabaseManager.shared.updateLastMessage(email: .other(self.otherUserEmail),
+                                                                conversationId: self.messageId,
+                                                                firstMessage: message)
+            }
+            .mapGetResultValue()
+
+        let updateLatestMessageSuccess = Observable.zip(updateLastMessageOtherEmail, updateLastMessageCurrentEmail)
             .asDriverOnErrorJustComplete()
+            .map({ $0 && $1 })
 
         let getAllMessages: Driver<[Message]> = DatabaseManager
             .shared
@@ -118,12 +145,13 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
         let sender = Driver.just(selfSender)
             .compactMap({ $0 })
 
-        let isSendMessageSuccess = Driver.merge(createNewConversation, sendMessage)
+        let isSendMessageSuccess = Observable.merge(createNewConversation, sendMessage).asDriverOnErrorJustComplete()
         
         return Output(nameUser: Driver.just(user.name).map({ $0.capitalized }),
                       isSendMessageSuccess: isSendMessageSuccess,
                       allMessages: getAllMessages,
-                      sender: sender)
+                      sender: sender,
+                      updateLatestMessageSuccess: updateLatestMessageSuccess)
     }
 
     private func createMessageId() -> String {
@@ -149,5 +177,6 @@ extension ChatViewModel {
         let isSendMessageSuccess: Driver<Bool>
         let allMessages: Driver<[Message]>
         let sender: Driver<Sender>
+        let updateLatestMessageSuccess: Driver<Bool>
     }
 }

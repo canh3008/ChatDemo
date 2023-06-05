@@ -75,6 +75,24 @@ struct MessageModel: Codable {
                        kind: .text(content))
     }
 }
+
+enum EmailType {
+    case other(String)
+    case current(String)
+
+    var getEmail: String {
+        switch self {
+        case .other(let string):
+            return string
+                .replacingOccurrences(of: "@", with: "-")
+                .replacingOccurrences(of: ".", with: "-")
+        case .current(let string):
+            return string
+                .replacingOccurrences(of: "@", with: "-")
+                .replacingOccurrences(of: ".", with: "-")
+        }
+    }
+}
 class DatabaseManager {
     static let shared = DatabaseManager()
     private let database = Database.database().reference()
@@ -264,7 +282,6 @@ extension DatabaseManager {
                                firstMessage: Message) -> Observable<Result<Bool, String>> {
         Observable.create { observer -> Disposable in
             let currentEmail = self.saveAccountManager.getData(key: .email)
-            let currentFullName = self.saveAccountManager.getData(key: .fullName)
             let safeCurrentEmail = currentEmail
                 .replacingOccurrences(of: "@", with: "-")
                 .replacingOccurrences(of: ".", with: "-")
@@ -274,40 +291,13 @@ extension DatabaseManager {
                     observer.onNext(.failed("Fail to get user node"))
                     return
                 }
-                let dateString = firstMessage.sentDate.dateString()
-                var message = ""
-                switch firstMessage.kind {
-                case .text(let messageText):
-                    message = messageText
-                case .attributedText:
-                    break
-                case .photo:
-                    break
-                case .video:
-                    break
-                case .location:
-                    break
-                case .emoji:
-                    break
-                case .audio:
-                    break
-                case .contact:
-                    break
-                case .linkPreview:
-                    break
-                case .custom:
-                    break
-                }
+
                 let conversationId = "conversations_\(firstMessage.messageId)"
                 let newConversationData: [String: Any] = [
                     "id": conversationId,
                     "other_user_email": otherUserEmail,
                     "name": name,
-                    "latest_message": [
-                        "date": dateString,
-                        "message": message,
-                        "is_read": false
-                    ]
+                    "latest_message": self.createNewLastMessage(firstMessage: firstMessage)
                 ]
                 if var conversation = userNode["conversations"] as? [[String: Any]] {
                     conversation.append(newConversationData)
@@ -344,6 +334,70 @@ extension DatabaseManager {
                                     firstMessage: firstMessage,
                                     otherUserEmail: otherUserEmail)
 
+            return Disposables.create()
+        }
+    }
+
+    private func createNewLastMessage(firstMessage: Message) -> [String: Any] {
+
+        var lastMessage = ""
+
+        switch firstMessage.kind {
+
+        case .text(let message):
+            lastMessage = message
+        case .attributedText:
+            break
+        case .photo:
+            break
+        case .video:
+            break
+        case .location:
+            break
+        case .emoji:
+            break
+        case .audio:
+            break
+        case .contact:
+            break
+        case .linkPreview:
+            break
+        case .custom:
+            break
+        }
+
+        let value: [String: Any] = [
+            "date": firstMessage.sentDate.dateString(),
+            "is_read": false,
+            "message": lastMessage
+        ]
+
+        return value
+    }
+
+    func updateLastMessage(email type: EmailType, conversationId: String, firstMessage: Message) -> Observable<Result<Bool, String>> {
+        Observable.create { observer -> Disposable in
+            let ref = self.database.child(type.getEmail).child("conversations")
+            ref.observeSingleEvent(of: .value) { snapshot in
+                guard var conversations = snapshot.value as? [[String: Any]] else {
+                    observer.onNext(.failed("Fail to get conversations"))
+                    return
+                }
+                for (index, conversation) in conversations.enumerated() {
+                    if let id = conversation["id"] as? String, id == conversationId {
+                        var newConversation = conversation
+                        newConversation["latest_message"] = self.createNewLastMessage(firstMessage: firstMessage)
+                        conversations[index] = newConversation
+                    }
+                }
+                ref.setValue(conversations) { error, _ in
+                    guard error == nil else {
+                        observer.onNext(.failed("Fail to set conversations"))
+                        return
+                    }
+                    observer.onNext(.success(true))
+                }
+            }
             return Disposables.create()
         }
     }

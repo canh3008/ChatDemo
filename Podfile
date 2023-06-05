@@ -20,12 +20,12 @@ target 'ChatDemo' do
   pod 'FirebaseStorage'
 
   # Facebook
-  pod 'FBSDKLoginKit'
+  pod 'FBSDKLoginKit', '14.1.0'
 
   # Google Sign-In
   pod 'GoogleSignIn'
 
-  pod 'RealmSwift'
+  # pod 'RealmSwift', '10.36.0'
   pod 'Kingfisher'
   # Pods for ChatDemo
 

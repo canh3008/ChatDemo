@@ -12,14 +12,14 @@ import RxSwift
 class ConversationsViewModel: BaseViewModel, ViewModelTransformable {
 
     private let saveAccountManager: SaveAccountManager
-    private var requestSubject = PublishSubject<String>()
+    private var requestSubject = BehaviorRelay<String?>(value: nil)
 
     init(saveAccountManager: SaveAccountManager = SaveAccountManager()) {
         self.saveAccountManager = saveAccountManager
     }
 
     func transform(input: Input) -> Output {
-        self.requestSubject.onNext(getSafeCurrentEmail())
+        self.requestSubject.accept(getSafeCurrentEmail())
         triggerEvent()
         return Output(allConversations: getAllConversation())
     }
@@ -27,6 +27,7 @@ class ConversationsViewModel: BaseViewModel, ViewModelTransformable {
     private func getAllConversation() -> Driver<[Conversation]> {
 
         return requestSubject
+            .compactMap({ $0 })
             .flatMapLatest({ email -> Observable<[Conversation]> in
             return DatabaseManager
                 .shared
@@ -37,7 +38,7 @@ class ConversationsViewModel: BaseViewModel, ViewModelTransformable {
     }
 
     @objc private func recallGetAllConversation() {
-        self.requestSubject.onNext(getSafeCurrentEmail())
+        self.requestSubject.accept(getSafeCurrentEmail())
     }
 
     private func triggerEvent() {
