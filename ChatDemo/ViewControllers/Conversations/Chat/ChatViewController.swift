@@ -13,7 +13,9 @@ import InputBarAccessoryView
 
 class ChatViewController: MessagesViewController {
 
+    private var mediaAlertController: MediaAlertViewController?
     private let disposeBag = DisposeBag()
+    private let selectionLimitPhoto = 2
     private let viewModel: ChatViewModel
     private var messages = [Message]() {
         didSet {
@@ -39,6 +41,27 @@ class ChatViewController: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         bindingData()
+        setupInputButton()
+    }
+
+    private func setupInputButton() {
+        let button = InputBarButtonItem()
+        button.setSize(CGSize(width: 35, height: 35), animated: false)
+        button.setImage(UIImage(systemName: "paperclip"), for: .normal)
+        button.onTouchUpInside { [weak self] _ in
+            guard let self = self else {
+                return
+            }
+            self.mediaAlertController = MediaAlertViewController(title: "Attach Media",
+                                                                 message: "What would you like to attach?",
+                                                                 style: .actionSheet,
+                                                                 selectionLimit: self.selectionLimitPhoto)
+            self.mediaAlertController?.delegate = self
+            self.mediaAlertController?.showAlert(animated: false)
+        }
+        messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+
     }
 
     private func bindingData() {
@@ -102,4 +125,11 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func numberOfSections(in messagesCollectionView: MessageKit.MessagesCollectionView) -> Int {
         messages.count
     }
+}
+
+extension ChatViewController: MediaAlertViewControllerDelegate {
+    func didSelectedPhotos(view: MediaAlertViewController, photos: [UIImage]) {
+        print("zzzzzzzzzzz photo count", photos.count)
+    }
+
 }
