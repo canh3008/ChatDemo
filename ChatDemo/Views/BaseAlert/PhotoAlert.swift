@@ -32,17 +32,18 @@ class PhotoAlertViewController: BaseAlertViewController {
         let alertViewController = UIAlertController(title: title,
                                                     message: message,
                                                     preferredStyle: style)
-        let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-            alertViewController.dismiss(animated: animated) { [weak self] in
+        let camera = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
+            alertViewController.dismiss(animated: animated) {
                 self?.presentCamera()
             }
         }
 
         let photoLibrary = UIAlertAction(title: "Photo Library", style: .default) { [weak self] _ in
-            alertViewController.dismiss(animated: animated) { [weak self] in
-                guard let self = self else {
-                    return
-                }
+            guard let self = self else {
+                return
+            }
+            alertViewController.dismiss(animated: animated) {
+
                 self.presentPhotoPicker(selectionLimit: self.selectionLimit)
             }
         }

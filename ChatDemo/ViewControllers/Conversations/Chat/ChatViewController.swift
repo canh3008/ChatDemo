@@ -53,7 +53,6 @@ class ChatViewController: MessagesViewController {
             guard let self = self else {
                 return
             }
-            self.mediaAlertController = nil
             self.mediaAlertController = MediaAlertViewController(title: "Attach Media",
                                                                  message: "What would you like to attach?",
                                                                  style: .actionSheet,
@@ -157,7 +156,8 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
 
 extension ChatViewController: MediaAlertViewControllerDelegate {
     func didSelectedPhotos(view: MediaAlertViewController, photos: [UIImage]) {
-//        self.photosSubject.onNext(photos)
+        self.photosSubject.onNext(photos)
+        mediaAlertController = nil
     }
 
 }

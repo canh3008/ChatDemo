@@ -32,8 +32,8 @@ class MediaAlertViewController: BaseAlertViewController, PhotoAlertFeature {
         let alertViewController = UIAlertController(title: title,
                                                     message: message,
                                                     preferredStyle: style)
-        let photo = UIAlertAction(title: "Photo", style: .default) { _ in
-            alertViewController.dismiss(animated: animated) { [weak self] in
+        let photo = UIAlertAction(title: "Photo", style: .default) { [weak self] _ in
+            alertViewController.dismiss(animated: animated) {
                 self?.showPhotoAlert(animated: animated)
             }
         }
