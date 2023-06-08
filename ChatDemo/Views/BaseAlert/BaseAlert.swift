@@ -30,4 +30,8 @@ class BaseAlertViewController: NSObject, AlertFeature {
 
     func showAlert(animated: Bool) {
     }
+
+    deinit {
+        print("Deinit: ", String(describing: Self.self))
+    }
 }

@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseDatabase
 import RxSwift
+import MessageKit
 
 struct ChatAppUser {
     let firstName: String
@@ -69,10 +70,39 @@ struct MessageModel: Codable {
         let sender = Sender(photoURL: "",
                             senderId: senderEmail,
                             displayName: name)
+        let kind = MessageKindText(rawValue: type) ?? .text
+        var finalKind: MessageKind = .text(content)
+
+        switch kind {
+        case .text:
+            finalKind = .text(content)
+        case .attributedText:
+            break
+        case .photo:
+            let media = Media(url: URL(string: content),
+                              image: nil,
+                              placeholderImage: UIImage(named: "image_waiting") ?? UIImage(),
+                              size: CGSize(width: UIScreen.main.bounds.width / 3, height: 200))
+            finalKind = .photo(media)
+        case .video:
+            break
+        case .location:
+            break
+        case .emoji:
+            break
+        case .audio:
+            break
+        case .contact:
+            break
+        case .linkPreview:
+            break
+        case .custom:
+            break
+        }
         return Message(sender: sender,
                        messageId: messageId,
                        sentDate: dateString.dateDefaultFormatter(),
-                       kind: .text(content))
+                       kind: finalKind)
     }
 }
 
@@ -115,7 +145,7 @@ extension DatabaseManager {
 
     func userExists(with email: String, completion: @escaping (Bool) -> Void) {
         database.child(email).observeSingleEvent(of: .value) { snapshot in
-            guard snapshot.value as? String != nil else {
+            guard snapshot.value != nil else {
                 completion(false)
                 return
             }
@@ -445,8 +475,8 @@ extension DatabaseManager {
                     messageText = message
                 case .attributedText:
                     break
-                case .photo:
-                    break
+                case .photo(let media):
+                    messageText = media.url?.absoluteString ?? ""
                 case .video:
                     break
                 case .location:

@@ -15,7 +15,7 @@ class ChatViewController: MessagesViewController {
 
     private var mediaAlertController: MediaAlertViewController?
     private let disposeBag = DisposeBag()
-    private let selectionLimitPhoto = 2
+    private let selectionLimitPhoto = 1
     private let viewModel: ChatViewModel
     private var messages = [Message]() {
         didSet {
@@ -24,6 +24,7 @@ class ChatViewController: MessagesViewController {
     }
     private var selfSender: Sender?
     private var newMessageSubject = PublishSubject<String>()
+    private var photosSubject = PublishSubject<[UIImage]>()
 
     init(viewModel: ChatViewModel) {
         self.viewModel = viewModel
@@ -52,6 +53,7 @@ class ChatViewController: MessagesViewController {
             guard let self = self else {
                 return
             }
+            self.mediaAlertController = nil
             self.mediaAlertController = MediaAlertViewController(title: "Attach Media",
                                                                  message: "What would you like to attach?",
                                                                  style: .actionSheet,
@@ -65,7 +67,7 @@ class ChatViewController: MessagesViewController {
     }
 
     private func bindingData() {
-        let input = ChatViewModel.Input(newMessage: newMessageSubject)
+        let input = ChatViewModel.Input(newMessage: newMessageSubject, photos: photosSubject)
 
         let output = viewModel.transform(input: input)
 
@@ -88,6 +90,13 @@ class ChatViewController: MessagesViewController {
             .disposed(by: disposeBag)
 
         output
+            .sendPhotoSuccess
+            .drive { isSuccess in
+                print("zzzzzzzzzzz is send photo", isSuccess)
+            }
+            .disposed(by: disposeBag)
+
+        output
             .allMessages
             .drive { [weak self] messages in
                 self?.messages = messages
@@ -100,6 +109,10 @@ class ChatViewController: MessagesViewController {
                 self?.selfSender = sender
             }
             .disposed(by: disposeBag)
+    }
+
+    deinit {
+        print("Deinit: ", String(describing: Self.self))
     }
 
 }
@@ -125,11 +138,26 @@ extension ChatViewController: MessagesDataSource, MessagesLayoutDelegate, Messag
     func numberOfSections(in messagesCollectionView: MessageKit.MessagesCollectionView) -> Int {
         messages.count
     }
+
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        guard let message = message as? Message else {
+            return
+        }
+        switch message.kind {
+        case .photo(let media):
+            guard let imageUrl = media.url else {
+                return
+            }
+            imageView.setImage(with: imageUrl)
+        default:
+            break
+        }
+    }
 }
 
 extension ChatViewController: MediaAlertViewControllerDelegate {
     func didSelectedPhotos(view: MediaAlertViewController, photos: [UIImage]) {
-        print("zzzzzzzzzzz photo count", photos.count)
+//        self.photosSubject.onNext(photos)
     }
 
 }

@@ -71,7 +71,6 @@ extension FirebaseAuthentication: EmailAuthenticationFeature {
                     guard let self = self else {
                         return
                     }
-                    let name = result?.user.displayName ?? ""
                     if let error = error {
                         let messageError = error.localizedDescription
                         observer.onNext(.failed(messageError))

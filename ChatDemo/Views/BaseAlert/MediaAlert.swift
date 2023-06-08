@@ -61,14 +61,11 @@ class MediaAlertViewController: BaseAlertViewController, PhotoAlertFeature {
         photoAlertViewController?.delegate = self
         photoAlertViewController?.showAlert(animated: animated)
     }
-
-    deinit {
-        print("Deinit: ", String(describing: Self.self))
-    }
 }
 
 extension MediaAlertViewController: PhotoAlertViewControllerDelegate {
     func didSelectedPhotos(view: PhotoAlertViewController, photos: [UIImage]) {
+        photoAlertViewController = nil
         delegate?.didSelectedPhotos(view: self, photos: photos)
     }
 }

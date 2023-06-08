@@ -9,14 +9,20 @@ import Foundation
 import FirebaseStorage
 import RxSwift
 
-protocol StorageFeature: AuthenticationFeature {
+protocol UploadPhotoFeature {
+    associatedtype ValueReturns
+}
+
+protocol StorageFeature: AuthenticationFeature, UploadPhotoFeature {
     func uploadProfilePicture(with data: Data, fileName: String) -> Observable<Result<ValueReturn, ErrorType>>
     func downloadURL(for path: String) -> Observable<Result<ValueReturn, ErrorType>>
+    func uploadMessagePhotos(data infos: [InfoPhoto]) -> Observable<Result<ValueReturns, ErrorType>>
 }
 
 class StorageManager: StorageFeature {
     typealias ErrorType = String
     typealias ValueReturn = String
+    typealias ValueReturns = [String]
 
     private let storage = Storage.storage().reference()
     private let saveLocalManager: SaveAccountManager
@@ -59,6 +65,36 @@ class StorageManager: StorageFeature {
                     return
                 }
                 observer.onNext(.success(url))
+            }
+            return Disposables.create()
+        }
+    }
+
+    func uploadMessagePhotos(data infos: [InfoPhoto]) -> Observable<Result<ValueReturns, ErrorType>> {
+        return Observable.create { observer -> Disposable in
+            let group = DispatchGroup()
+            var urls: [String] = []
+            infos.forEach { info in
+                group.enter()
+                self.storage.child("/message_photos/\(info.fileName)").putData(info.data) { _, error in
+                    guard error == nil else {
+                        observer.onNext(.failed(error?.localizedDescription ?? "Nil"))
+                        return
+                    }
+                    self.storage.child("/message_photos/\(info.fileName)").downloadURL { url, error in
+                        guard error == nil, let url = url else {
+                            observer.onNext(.failed(error?.localizedDescription ?? "Nil"))
+                            return
+                        }
+                        let urlString = url.absoluteString
+                        urls.append(urlString)
+                        group.leave()
+                    }
+                }
+            }
+
+            group.notify(queue: .main) {
+                observer.onNext(.success(urls))
             }
             return Disposables.create()
         }

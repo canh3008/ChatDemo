@@ -10,6 +10,18 @@ import MessageKit
 import RxSwift
 import RxCocoa
 
+struct InfoPhoto {
+    let data: Data
+    let fileName: String
+}
+
+struct Media: MediaItem {
+    var url: URL?
+    var image: UIImage?
+    var placeholderImage: UIImage
+    var size: CGSize
+}
+
 struct Message: MessageType {
     var sender: MessageKit.SenderType
     var messageId: String
@@ -17,29 +29,42 @@ struct Message: MessageType {
     var kind: MessageKit.MessageKind
 }
 
+enum MessageKindText: String {
+    case text = "text"
+    case attributedText = "attributed_text"
+    case photo = "photo"
+    case video = "video"
+    case location = "location"
+    case emoji = "emoji"
+    case audio = "audio"
+    case contact = "contact"
+    case linkPreview = "linkPreview"
+    case custom = "custom"
+}
+
 extension MessageKind {
     var description: String {
         switch self {
         case .text:
-            return "text"
+            return MessageKindText.text.rawValue
         case .attributedText:
-            return "attributed_text"
+            return MessageKindText.attributedText.rawValue
         case .photo:
-            return "photo"
+            return MessageKindText.photo.rawValue
         case .video:
-            return "video"
+            return MessageKindText.video.rawValue
         case .location:
-            return "location"
+            return MessageKindText.location.rawValue
         case .emoji:
-            return "emoji"
+            return MessageKindText.emoji.rawValue
         case .audio:
-            return "audio"
+            return MessageKindText.audio.rawValue
         case .contact:
-            return "contact"
+            return MessageKindText.contact.rawValue
         case .linkPreview:
-            return "linkPreview"
+            return MessageKindText.linkPreview.rawValue
         case .custom:
-            return "custom"
+            return MessageKindText.custom.rawValue
         }
     }
 }
@@ -56,6 +81,7 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
     private let user: User
     private let isNewConversation: Bool
     private let saveAccountManager: SaveAccountManager
+    private let storageManager: StorageManager
     private var selfSender: Sender!
     private let dateString = Date().dateString()
     private var otherUserEmail = ""
@@ -65,7 +91,8 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
     init(user: User,
          isNewConversation: Bool = false,
          id: String = "",
-         saveAccountManager: SaveAccountManager = SaveAccountManager()) {
+         saveAccountManager: SaveAccountManager = SaveAccountManager(),
+         storageManager: StorageManager = StorageManager()) {
         self.user = user
         self.messageId = id
         self.otherUserEmail = user.safeEmail
@@ -78,6 +105,7 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
         self.selfSender = Sender(photoURL: "",
                                  senderId: currentEmail,
                                  displayName: fullName)
+        self.storageManager = storageManager
     }
 
     func transform(input: Input) -> Output {
@@ -136,6 +164,31 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
             .asDriverOnErrorJustComplete()
             .map({ $0 && $1 })
 
+        let uploadMessagePhotos = input.photos
+            .map({ $0.map({ InfoPhoto(data: $0.pngData() ?? Data(), fileName: self.createPhotoId()) }) })
+            .flatMapLatest { [weak self] infos -> Observable<Result<[String], String>> in
+                guard let self = self else {
+                    return .empty()
+                }
+
+                return self.storageManager.uploadMessagePhotos(data: infos)
+            }
+            .share()
+
+        let uploadMessagePhotosSuccess: Observable<[String]> = uploadMessagePhotos
+            .mapGetResultValue()
+
+        let sendPhoto = uploadMessagePhotosSuccess
+            .map({ self.createPhotoMessages(with: $0) })
+            .compactMap({ $0.first })
+            .flatMapLatest { message -> Observable<Result<Bool, String>> in
+                DatabaseManager.shared.sendMessage(to: self.messageId, message: message)
+            }
+
+        let sendPhotoSuccess = sendPhoto
+            .mapGetResultSuccess()
+            .asDriverOnErrorJustComplete()
+
         let getAllMessages: Driver<[Message]> = DatabaseManager
             .shared
             .getAllMessagesForConversation(with: self.messageId)
@@ -151,7 +204,8 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
                       isSendMessageSuccess: isSendMessageSuccess,
                       allMessages: getAllMessages,
                       sender: sender,
-                      updateLatestMessageSuccess: updateLatestMessageSuccess)
+                      updateLatestMessageSuccess: updateLatestMessageSuccess,
+                      sendPhotoSuccess: sendPhotoSuccess)
     }
 
     private func createMessageId() -> String {
@@ -165,11 +219,26 @@ class ChatViewModel: BaseViewModel, ViewModelTransformable {
                        sentDate: Date(),
                        kind: .text(text))
     }
+
+    private func createPhotoId() -> String {
+        return "message_photo" + createMessageId()
+    }
+
+    private func createPhotoMessages(with urls: [String]) -> [Message] {
+        urls.map({ Message(sender: self.selfSender,
+                           messageId: createMessageId(),
+                           sentDate: Date(),
+                           kind: .photo(Media(url: URL(string: $0),
+                                              image: nil,
+                                              placeholderImage: UIImage(),
+                                              size: .zero))) })
+    }
 }
 
 extension ChatViewModel {
     struct Input {
         let newMessage: Observable<String>
+        let photos: Observable<[UIImage]>
     }
 
     struct Output {
@@ -178,5 +247,6 @@ extension ChatViewModel {
         let allMessages: Driver<[Message]>
         let sender: Driver<Sender>
         let updateLatestMessageSuccess: Driver<Bool>
+        let sendPhotoSuccess: Driver<Bool>
     }
 }

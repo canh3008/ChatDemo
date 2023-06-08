@@ -82,19 +82,12 @@ class PhotoAlertViewController: BaseAlertViewController {
         pickerController.delegate = self
         topViewController.present(pickerController, animated: false)
     }
-
-    deinit {
-        print("Deinit: ", String(describing: Self.self))
-    }
 }
 
 extension PhotoAlertViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        guard let topViewController = UIApplication.topViewController() else {
-            return
-        }
-        topViewController.dismiss(animated: false)
+        picker.dismiss(animated: false)
     }
 }
 
